@@ -1,0 +1,23 @@
+.Left {
+  position: absolute;
+  top: 145px;
+  left: 31px;
+  z-index: 10;
+  width: 482px;
+  display: grid;
+  grid-template-columns: 482px;
+  grid-template-rows: 443px 443px;
+  row-gap: 20px;
+  > div:nth-child(1) {
+    width: 482px;
+    height: 443px;
+    background: url('./left1.png');
+    background-size: contain;
+  }
+  > div:nth-child(2) {
+    width: 482px;
+    height: 443px;
+    background: url('./left2.png');
+    background-size: contain;
+  }
+}
