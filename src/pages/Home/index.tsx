@@ -1,3 +1,4 @@
+import HeaderBG from '@/assets/page/header.png'
 import { CanvasBg } from '@/components/CanvasBg';
 
 import styles from './style.module.less';
@@ -7,7 +8,7 @@ export default function HomePage() {
     <div className={styles.Page}>
       <CanvasBg type="universe" />
       <div className={styles.header}>
-        <div className={styles.headerTitle}>宇宙大屏</div>
+        <img src={HeaderBG} />
       </div>
     </div>
   );

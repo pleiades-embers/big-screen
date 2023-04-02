@@ -4555,7 +4555,7 @@ packages:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2_sbwcdikydvvxbbxnj56wt2n5dq
+      postcss-syntax: 0.36.2_sb7aqtcgsdojn4sqfgupksl5ye
     dev: true
 
   /postcss-jsx/0.36.4_j55xdkkcxc32kvnyvx3y7casfm:
@@ -4566,7 +4566,7 @@ packages:
     dependencies:
       '@babel/core': 7.20.7
       postcss: 7.0.39
-      postcss-syntax: 0.36.2_sbwcdikydvvxbbxnj56wt2n5dq
+      postcss-syntax: 0.36.2_sb7aqtcgsdojn4sqfgupksl5ye
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4594,7 +4594,7 @@ packages:
       postcss-syntax: '>=0.36.0'
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2_sbwcdikydvvxbbxnj56wt2n5dq
+      postcss-syntax: 0.36.2_sb7aqtcgsdojn4sqfgupksl5ye
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
     dev: true
@@ -4688,7 +4688,7 @@ packages:
       postcss: 8.4.20
     dev: true
 
-  /postcss-syntax/0.36.2_sbwcdikydvvxbbxnj56wt2n5dq:
+  /postcss-syntax/0.36.2_sb7aqtcgsdojn4sqfgupksl5ye:
     resolution: {integrity: sha512-nBRg/i7E3SOHWxF3PpF5WnJM/jQ1YpY9000OaVXlAQj6Zp/kIqJxEDWIZ67tAd7NLuk7zqN4yqe9nc0oNAOs1w==}
     peerDependencies:
       postcss: '>=5.0.0'
@@ -4709,12 +4709,8 @@ packages:
       postcss-scss:
         optional: true
     dependencies:
-      postcss: 7.0.39
-      postcss-html: 0.36.0_j55xdkkcxc32kvnyvx3y7casfm
-      postcss-jsx: 0.36.4_j55xdkkcxc32kvnyvx3y7casfm
-      postcss-less: 3.1.4
-      postcss-markdown: 0.36.0_j55xdkkcxc32kvnyvx3y7casfm
-      postcss-scss: 2.1.1
+      postcss: 8.4.20
+      postcss-less: 6.0.0_postcss@8.4.20
     dev: true
 
   /postcss-value-parser/3.3.1:
@@ -6214,7 +6210,7 @@ packages:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2_sbwcdikydvvxbbxnj56wt2n5dq
+      postcss-syntax: 0.36.2_sb7aqtcgsdojn4sqfgupksl5ye
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7

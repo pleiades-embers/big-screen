@@ -23,7 +23,7 @@ pnpm preview          # 本地打包并预览打包后的页面
 
 ### 核心组件
 
-- **ScreenAdaptor**: 根据设计稿尺寸与页面实际视口，动态计算根元素 html 的 `font-size` 以及大屏容器适配视口后的实际宽高
+- \*\*\*\*: 根据设计稿尺寸与页面实际视口，动态计算根元素 html 的 `font-size` 以及大屏容器适配视口后的实际宽高
 - **SuperEChart**: 二次封装 echarts
   - [按需引入图表](https://echarts.apache.org/handbook/zh/basics/import#%E5%9C%A8-typescript-%E4%B8%AD%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5)
   - 抽离并初始化一些通用的图表配置项，主要是坐标轴、样式相关的
