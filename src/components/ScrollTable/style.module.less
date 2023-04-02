@@ -1,0 +1,48 @@
+.scrollTable {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  :global {
+    .dv-scroll-board {
+      .header {
+        position: relative;
+        color: #def0ff;
+        font-weight: normal;
+        font-size: 16px;
+
+        &-item {
+          padding: 0 6px;
+          // background-color: #256199;
+          // background-clip: padding-box;
+          border: none;
+          // border-right: 4px solid transparent;
+
+          // &:last-child {
+          //   border-right: 0 solid transparent;
+          // }
+        }
+      }
+
+      .rows {
+        .row-item {
+          color: rgba(255, 255, 255, 0.85);
+          font-size: 14px;
+          line-height: 20px;
+          border-bottom: 0;
+
+          .ceil {
+            padding: 0 0 0 6px;
+            background: transparent;
+            border: none;
+            // border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+            // &:last-child {
+            //   border-right: none;
+            // }
+          }
+        }
+      }
+    }
+  }
+}
