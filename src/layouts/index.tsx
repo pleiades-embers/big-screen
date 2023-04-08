@@ -13,7 +13,7 @@ export function AppLayout() {
   const token = params.get('token');
   let isLogin = !!getAuthToken() || true;
 
-  console.log('token', token);
+  // console.log('token', token);
 
   if (!isLogin && token) {
     setAuthToken(token);

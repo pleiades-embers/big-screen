@@ -1,0 +1,22 @@
+.board {
+  margin-top: 50px;
+  padding: 0px 16px 0px 16px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  margin-bottom: 5px;
+
+  > div {
+    display: grid;
+    place-content: center;
+    place-items: center;
+    grid-template-columns: 1fr 6fr 2fr;
+    grid-template-rows: 57px;
+    font-family: 'PingFang SC';
+    font-style: normal;
+    font-weight: bold;
+    > div:nth-child(2) {
+      place-self: center start;
+      margin-left: 40px;
+    }
+  }
+}

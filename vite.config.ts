@@ -39,9 +39,15 @@ export default defineConfig({
   define: {
     VITE_MODE: `"${process.env.VITE_MODE || 'dev'}"`,
   },
+
   server: {
     host: true,
     port: 3033,
+    proxy: {
+      '/vital': {
+        target: 'http://47.100.208.92:81',
+      },
+    },
   },
   plugins: [
     legacy({
@@ -60,6 +66,7 @@ export default defineConfig({
       ],
     }),
   ],
+
   css: {
     // css modules
     modules: {

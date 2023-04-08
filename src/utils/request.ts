@@ -2,7 +2,7 @@ import { message, notification } from 'antd';
 import * as qs from 'qss';
 
 import config from './config';
-// import { getAuthToken } from './storage';
+import { getAuthToken } from './storage';
 
 declare global {
   interface Blob {
@@ -24,7 +24,7 @@ export interface STD_RESPONSE_FORMAT {
 
 // 业务code
 export enum BUSINESS_CODE {
-  SUCCESS_CODE = 20000, // 请求成功
+  SUCCESS_CODE = 0, // 请求成功
   TOKEN_INCORRECT = 40007, // token错误
   TOKEN_EXPIRED = 40008,
   TOKEN_INVALID = 40009,
@@ -41,8 +41,7 @@ class Request {
   fetch = (url: string, options: RequestInit = {}) => {
     let realUrl = url.match(/^(http)|(\/\/)/) ? url : `${this.serverUrl}${url}`;
     let headers = { ...(options.headers ? options.headers : {}) };
-    // if (getAuthToken()) headers['Authorization'] = getAuthToken();
-
+    if (getAuthToken()) headers['Authorization'] = getAuthToken();
     const promiseList = [
       window.fetch(realUrl, { ...options, headers }),
       // fetch 请求60秒超时判断
@@ -104,7 +103,7 @@ class Request {
 
       switch (code) {
         case BUSINESS_CODE.SUCCESS_CODE:
-          return stdResponse;
+          return stdResponse.data;
         case BUSINESS_CODE.TOKEN_INCORRECT:
         case BUSINESS_CODE.TOKEN_EXPIRED:
         case BUSINESS_CODE.TOKEN_INVALID:

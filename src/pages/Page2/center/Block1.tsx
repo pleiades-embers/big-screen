@@ -220,8 +220,8 @@ function getChart(data: any[]): ECOption {
       data:
         points.length === 1
           ? // 当数据只有一个点时，不知道为什么，echarts的事件捕获不到这条数据，
-            // 所以我们加入一个临时透明数据来解决这个问题
-            [{ name: 'temp', value: [0, 0, 30], itemStyle: { opacity: 0 } }, ...points]
+          // 所以我们加入一个临时透明数据来解决这个问题
+          [{ name: 'temp', value: [0, 0, 30], itemStyle: { opacity: 0 } }, ...points]
           : points,
     },
   ];
