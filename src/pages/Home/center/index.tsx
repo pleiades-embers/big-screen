@@ -7,6 +7,7 @@ import { SuperEChart } from '@/components/SuperEChart';
 
 import styles from './style.module.less';
 import WorldPalestine from "./world.json"
+// @ts-ignore
 registerMap("Asia", WorldPalestine)
 export default function Center(props) {
     const { total } = props;
@@ -149,15 +150,8 @@ const mapOption = {
 
 };
 
-function getChart(data: any[]): ECOption {
-    function mapData(data) {
-        return data?.map((item) => {
-            return {
-                name: item.areaEn,
-                value: item.confirmed,
-            };
-        });
-    }
+function getChart(): ECOption {
+
 
     return {
         // visualMap: {

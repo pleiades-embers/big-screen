@@ -1,5 +1,5 @@
 import { useRequest } from 'ahooks';
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 
 import HeaderBG from '@/assets/page/header.png';
 import { CanvasBg } from '@/components/CanvasBg';
@@ -11,7 +11,7 @@ import Right from './right';
 import styles from './style.module.less';
 
 export default function HomePage() {
-  const { data, loading } = useRequest(() => postDetailRank());
+  const { data } = useRequest(() => postDetailRank());
 
   const { health, nature, psychology, society, total } = useMemo(() => {
     if (!data) {
