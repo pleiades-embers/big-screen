@@ -29,7 +29,7 @@ export default function Center(props) {
     return (
         <div className={styles.center}>
             <SuperEChart
-                options={getChart([])}
+                options={getChart()}
                 mergeOptions={false}
             />
             <div>
