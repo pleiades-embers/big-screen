@@ -25,7 +25,10 @@ import type {
   LegendComponentOption,
   PolarComponentOption,
   TitleComponentOption,
-  TooltipComponentOption,
+  TooltipComponentOption
+} from 'echarts/components';
+import {
+  VisualMapComponent,
 } from 'echarts/components';
 import {
   DataZoomComponent,
@@ -49,6 +52,9 @@ import { toAdaptedPx } from '@/utils';
 import baseOptions from './baseOptions';
 import styles from './style.module.less';
 import customThemeJSON from './theme.json';
+
+
+
 
 export type EChartInstance = echarts.ECharts;
 export const linearGradient = echarts.graphic.LinearGradient;
@@ -96,6 +102,7 @@ echarts.use([
   Scatter3DChart,
   Geo3DComponent,
   Map3DChart,
+  VisualMapComponent
 ]);
 
 // 自定义echart主题

@@ -5,6 +5,7 @@ import HeaderBG from '@/assets/page/header.png';
 import { CanvasBg } from '@/components/CanvasBg';
 import { postDetailRank } from '@/services/page';
 
+import Center from './center';
 import Left from './left';
 import Right from './right';
 import styles from './style.module.less';
@@ -33,7 +34,7 @@ export default function HomePage() {
         <img src={HeaderBG} />
       </div>
       <Left health={health} nature={nature}></Left>
-      <div></div>
+      <Center total={total}></Center>
       <Right psychology={psychology} society={society}></Right>
     </div>
   );
