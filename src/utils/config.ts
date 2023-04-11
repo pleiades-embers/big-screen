@@ -1,9 +1,9 @@
 export default {
   local: {
-    BASE_API: 'https://big-screen-sigma.vercel.app',
+    BASE_API: 'http://47.100.208.92:81',
   },
   dev: {
-    BASE_API: 'https://big-screen-sigma.vercel.app',
+    BASE_API: 'http://47.100.208.92:81',
   },
   test: {
     BASE_API: 'http://47.100.208.92:81',
