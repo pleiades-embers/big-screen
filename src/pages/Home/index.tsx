@@ -13,7 +13,7 @@ import styles from './style.module.less';
 export default function HomePage() {
   const { data } = useRequest(() => postDetailRank());
 
-  const { health, nature, psychology, society, total } = useMemo(() => {
+  const { health, nature, psychology, society } = useMemo(() => {
     if (!data) {
       return { health: [], nature: [], psychology: [], society: [], total: [] };
     } else {
@@ -34,7 +34,7 @@ export default function HomePage() {
         <img src={HeaderBG} />
       </div>
       <Left health={health} nature={nature}></Left>
-      <Center total={total}></Center>
+      <Center data={data}></Center>
       <Right psychology={psychology} society={society}></Right>
     </div>
   );

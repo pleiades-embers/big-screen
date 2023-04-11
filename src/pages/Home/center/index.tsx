@@ -1,5 +1,6 @@
 import { ScrollBoard } from '@jiaminghi/data-view-react';
 import { registerMap } from 'echarts/core';
+import { useMemo } from 'react';
 
 import BoardHeader from '@/components/BoardHeader';
 import type { ECOption } from '@/components/SuperEChart';
@@ -12,24 +13,79 @@ import WorldPalestine from './world.json';
 // @ts-ignore
 registerMap('Asia', WorldPalestine);
 export default function Center(props) {
-    const { total } = props;
+    const { data } = props;
     const totalConfig = {
-        data:
-            total?.map(getBoardConfig) ?? [],
+        data: data?.total?.map(getBoardConfig) ?? [],
         oddRowBGC: 'rgba(255, 255, 255, 0.17)',
         evenRowBGC: 'transparent',
         columnWidth: [toAdaptedPx(120), toAdaptedPx(520), toAdaptedPx(100)],
         rowNum: 8,
     };
 
+    //地图数据处理
+    const { mapData, visualMap } = useMemo(() => {
+        if (!data) {
+            return {
+                mapData: [],
+                visualMap: {},
+            };
+        }
+        let arr = structuredClone(data?.total);
+
+        return {
+            mapData: arr.map((item) => {
+                return {
+                    ...item,
+                    name: item.countryNameEn,
+                    value: item.score,
+                    health: data.health.find((item2) => item.countryName === item2.countryName),
+                    nature: data.nature.find((item2) => item.countryName === item2.countryName),
+                    psychology: data.psychology.find(
+                        (item2) => item.countryName === item2.countryName,
+                    ),
+                    society: data.society.find((item2) => item.countryName === item2.countryName),
+                };
+            }),
+            visualMap: {
+                min: 0,
+                type: 'piecewise',
+                splitNumber: 3,
+                orient: 'horizontal',
+                left: 'center',
+                bottom: '3%',
+                pieces: [
+                    {
+                        lte: data?.total[0]?.score,
+                        gte: data?.total[9]?.score,
+                        label: 'Top1-Top10',
+                        color: '#ff7c72',
+                    },
+                    {
+                        lte: data?.total[10]?.score,
+                        gte: data?.total[19]?.score,
+                        label: 'Top11-Top20',
+                        color: '#f23829',
+                    },
+                    {
+                        lte: data?.total[20]?.score,
+                        label: 'Top20及以下',
+                        color: '#a61f15',
+                    },
+                ],
+                textStyle: {
+                    color: 'white',
+                },
+            },
+        };
+    }, [data]);
+
     return (
         <div className={styles.center}>
-            <SuperEChart options={getChart()} mergeOptions={false} />
+            <SuperEChart options={getChart(mapData, visualMap)} mergeOptions={false} />
             <div>
                 <BoardHeader borderColor="#1B7AE4"></BoardHeader>
                 <div className={styles.boardBox}>
                     <ScrollBoard
-
                         style={{
                             width: '100%',
                         }}
@@ -102,90 +158,60 @@ const mapOption = {
             enable: true,
         },
     },
-    //地图数值颜色
-    visualMap: {
-        pieces: [
-            {
-                min: 100001,
-                color: '#BB0000',
-            },
-            {
-                min: 50001,
-                max: 100000,
-                color: '#a2242c', // #73240D
-            },
-            {
-                min: 25001,
-                max: 50000,
-                color: '#C62B2B',
-            },
-            {
-                min: 1001,
-                max: 25000,
-                color: '#D25555',
-            },
-            {
-                min: 3001,
-                max: 10000,
-                color: '#d0513c',
-            },
-            {
-                min: 501,
-                max: 3000,
-                color: '#ed9f65',
-            },
-
-            {
-                min: 1,
-                max: 500,
-                color: '#ed9a62',
-            },
-            {
-                value: 0,
-                color: 'white',
-            },
-        ],
-    },
 };
 
-function getChart(): ECOption {
+function getChart(data, visualMap): ECOption {
     return {
-        // visualMap: {
-        //     show: false,
-        //     type: "piecewise",
-        //     pieces: mapOption.visualMap.pieces,
-        //     orient: "vertical",
-        //     itemWidth: 25,
-        //     itemHeight: 15,
-        //     showLabel: true,
-        //     seriesIndex: [0],
-        //     textStyle: {
-        //         color: "#7B93A7",
-        //     },
-
-        // },
         tooltip: {
             show: true,
         },
         series: [
             {
-                name: '确诊人数',
+                name: '环太生命指数',
                 // @ts-ignore
                 //数据源
                 type: 'map3D',
                 map: 'Asia',
-                data: [],
-                // label: {
-                //     show: true, //是否显示市
-                //     textStyle: {
-                //         color: "#fff", //文字颜色
-                //         fontSize: 12, //文字大小
-                //         fontFamily: "微软雅黑",
-                //         backgroundColor: "rgba(0,0,0,0)", //透明度0清空文字背景
-                //     },
-                // },
+                data: data,
                 ...mapOption.series,
+                tooltip: {
+                    show: true,
+                    enterable: true, //鼠标可进入浮层内
+                    // backgroundColor: 'transparent',
+                    // borderColor: 'transparent', // 修改字体颜色
+                    formatter: function (params) {
+                        const tooltipData = params?.data;
+                        let res = `<div >
+                        <div>
+                        <span >国家:</span>
+                        <span class="num">${tooltipData?.countryName}(${tooltipData?.countryNameEn})</span>
+                      </div>
+                        <div>
+                          <span >总排名</span>
+                          <span class="num">${tooltipData?.value}</span>
+                        </div>
+                        <div >
+                        <span >健康维度</span>
+                        <span class="num">${tooltipData?.health?.score}</span>
+                        </div>
+                        <div >
+                        <span >自然维度</span>
+                        <span class="num">${tooltipData?.nature?.score}</span>
+                        </div>
+                        <div >
+                        <span >社会维度</span>
+                        <span class="num">${tooltipData?.psychology?.score}</span>
+                        </div>
+                        <div >
+                        <span >心里维度</span>
+                        <span class="num">${tooltipData?.society?.score}</span>
+                        </div>
+                    </div>`;
+                        return res;
+                    },
+                },
             },
         ],
+        visualMap,
     };
 }
