@@ -1,3 +1,4 @@
+
 import { lazy } from 'react';
 import { Route, Routes, useSearchParams } from 'react-router-dom';
 
@@ -7,7 +8,6 @@ import uiConfig from '@/ui.config.json';
 import { getAuthToken, setAuthToken } from '@/utils/storage';
 
 import { routeList } from './config';
-
 export function AppLayout() {
   const [params] = useSearchParams();
   const token = params.get('token');

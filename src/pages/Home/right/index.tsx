@@ -2,6 +2,7 @@ import { ScrollBoard } from '@jiaminghi/data-view-react';
 
 import BoardHeader from '@/components/BoardHeader';
 
+import { getBoardConfig } from '../boardCell';
 import styles from './style.module.less';
 
 export default function Right(props) {
@@ -9,13 +10,7 @@ export default function Right(props) {
 
     const psychologyConfig = {
         data:
-            psychology?.map((item) => {
-                return [
-                    `<span style="height:10px;">${item.sortNum}</span>`,
-                    `<span style="height:10px;">${item.countryName}(${item.countryNameEn})</span>`,
-                    `<span style="height:10px;">${item.score?.toFixed(2)}</span>`,
-                ];
-            }) ?? [],
+            psychology?.map(getBoardConfig) ?? [],
         oddRowBGC: 'rgba(255, 255, 255, 0.17)',
         evenRowBGC: 'transparent',
         columnWidth: [100, 240, 100],
@@ -24,13 +19,7 @@ export default function Right(props) {
 
     const societyConfig = {
         data:
-            society?.map((item) => {
-                return [
-                    `<span style="height:10px;">${item.sortNum}</span>`,
-                    `<span style="height:10px;">${item.countryName}(${item.countryNameEn})</span>`,
-                    `<span style="height:10px;">${item.score?.toFixed(2)}</span>`,
-                ];
-            }) ?? [],
+            society?.map(getBoardConfig) ?? [],
         oddRowBGC: 'rgba(255, 255, 255, 0.17)',
         evenRowBGC: 'transparent',
         columnWidth: [100, 240, 100],

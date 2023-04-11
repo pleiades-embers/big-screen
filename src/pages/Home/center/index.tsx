@@ -4,43 +4,42 @@ import { registerMap } from 'echarts/core';
 import BoardHeader from '@/components/BoardHeader';
 import type { ECOption } from '@/components/SuperEChart';
 import { SuperEChart } from '@/components/SuperEChart';
+import { toAdaptedPx } from '@/utils';
 
+import { getBoardConfig } from '../boardCell';
 import styles from './style.module.less';
-import WorldPalestine from "./world.json"
+import WorldPalestine from './world.json';
 // @ts-ignore
-registerMap("Asia", WorldPalestine)
+registerMap('Asia', WorldPalestine);
 export default function Center(props) {
     const { total } = props;
     const totalConfig = {
         data:
-            total?.map((item) => {
-                return [
-                    `<span style="height:10px;">${item.sortNum}</span>`,
-                    `<span style="height:10px;">${item.countryName}(${item.countryNameEn})</span>`,
-                    `<span style="height:10px;">${item.score?.toFixed(2)}</span>`,
-                ];
-            }) ?? [],
+            total?.map(getBoardConfig) ?? [],
         oddRowBGC: 'rgba(255, 255, 255, 0.17)',
         evenRowBGC: 'transparent',
-        columnWidth: [100, 240, 100],
-        rowNum: 5,
+        columnWidth: [toAdaptedPx(120), toAdaptedPx(520), toAdaptedPx(100)],
+        rowNum: 8,
     };
 
     return (
         <div className={styles.center}>
-            <SuperEChart
-                options={getChart()}
-                mergeOptions={false}
-            />
+            <SuperEChart options={getChart()} mergeOptions={false} />
             <div>
                 <BoardHeader borderColor="#1B7AE4"></BoardHeader>
-                <ScrollBoard config={totalConfig} />
-            </div>
+                <div className={styles.boardBox}>
+                    <ScrollBoard
 
+                        style={{
+                            width: '100%',
+                        }}
+                        config={totalConfig}
+                    />
+                </div>
+            </div>
         </div>
     );
 }
-
 
 const mapOption = {
     series: {
@@ -50,7 +49,7 @@ const mapOption = {
         itemStyle: {
             opacity: 1, // 透明度
             borderWidth: 0.6, //分界线宽度
-            borderColor: "#207fce", //分界线颜色
+            borderColor: '#207fce', //分界线颜色
         },
         groundplane: {
             show: false,
@@ -60,16 +59,16 @@ const mapOption = {
                 intensity: 3, //光照强度
                 alpha: 24,
                 shadow: true,
-                shadowQuality: "high",
+                shadowQuality: 'high',
             },
             ambient: {
                 intensity: 0,
             },
         },
-        shading: "realistic",
+        shading: 'realistic',
         // 真实感材质相关配置 shading: 'realistic'时有效
         realisticMaterial: {
-            detailTexture: "#fff", // 纹理贴图
+            detailTexture: '#fff', // 纹理贴图
             textureTiling: 1, // 纹理平铺，1是拉伸，数字表示纹理平铺次数
             roughness: 0.5, // 材质粗糙度，0完全光滑，1完全粗糙
             metalness: 0, // 0材质是非金属 ，1金属
@@ -77,7 +76,7 @@ const mapOption = {
         },
         viewControl: {
             //投影方式，默认为透视投影'perspective'，也支持设置为正交投影'orthographic'。
-            projection: "orthographic",
+            projection: 'orthographic',
             //正交投影此配置失效
             distance: 85,
             orthographicSize: 90,
@@ -93,7 +92,7 @@ const mapOption = {
         //环境光遮蔽
         screenSpaceAmbientOcclusion: {
             enable: true,
-            quality: "high",
+            quality: 'high',
         },
         bloomObject: {
             enable: true,
@@ -113,7 +112,7 @@ const mapOption = {
             {
                 min: 50001,
                 max: 100000,
-                color: '#a2242c' // #73240D
+                color: '#a2242c', // #73240D
             },
             {
                 min: 25001,
@@ -133,26 +132,23 @@ const mapOption = {
             {
                 min: 501,
                 max: 3000,
-                color: '#ed9f65'
+                color: '#ed9f65',
             },
 
             {
                 min: 1,
                 max: 500,
-                color: '#ed9a62'
+                color: '#ed9a62',
             },
             {
                 value: 0,
-                color: 'white'
-            }
-        ]
-    }
-
+                color: 'white',
+            },
+        ],
+    },
 };
 
 function getChart(): ECOption {
-
-
     return {
         // visualMap: {
         //     show: false,
@@ -173,11 +169,11 @@ function getChart(): ECOption {
         },
         series: [
             {
-                name: "确诊人数",
+                name: '确诊人数',
                 // @ts-ignore
                 //数据源
                 type: 'map3D',
-                map: "Asia",
+                map: 'Asia',
                 data: [],
                 // label: {
                 //     show: true, //是否显示市
@@ -189,7 +185,6 @@ function getChart(): ECOption {
                 //     },
                 // },
                 ...mapOption.series,
-
             },
         ],
     };
