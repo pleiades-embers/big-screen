@@ -6,9 +6,9 @@ export default {
     BASE_API: 'https://big-screen-sigma.vercel.app',
   },
   test: {
-    BASE_API: 'https://big-screen-sigma.vercel.app',
+    BASE_API: 'http://47.100.208.92:81',
   },
   prod: {
-    BASE_API: 'https://big-screen-sigma.vercel.app',
+    BASE_API: 'http://47.100.208.92:81',
   },
 }[VITE_MODE];
