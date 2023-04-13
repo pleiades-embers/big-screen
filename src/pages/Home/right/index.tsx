@@ -30,11 +30,11 @@ export default function Right(props) {
         <div className={styles.Right}>
             <div>
                 <BoardHeader borderColor="#FBC819"></BoardHeader>
-                <ScrollBoard config={psychologyConfig} />
+                <ScrollBoard config={societyConfig} />
             </div>
             <div>
                 <BoardHeader borderColor="#98CCE4"></BoardHeader>
-                <ScrollBoard config={societyConfig} />
+                <ScrollBoard config={psychologyConfig} />
             </div>
         </div>
     );

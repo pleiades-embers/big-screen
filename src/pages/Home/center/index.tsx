@@ -174,6 +174,15 @@ function getChart(data, visualMap): ECOption {
                 map: 'Asia',
                 data: data,
                 ...mapOption.series,
+                // label: {
+                //     show: true, //是否显示市
+                //     textStyle: {
+                //         color: "#fff", //文字颜色
+                //         fontSize: 12, //文字大小
+                //         fontFamily: "微软雅黑",
+                //         backgroundColor: "rgba(0,0,0,0)", //透明度0清空文字背景
+                //     },
+                // },
                 tooltip: {
                     show: true,
                     enterable: true, //鼠标可进入浮层内
@@ -181,30 +190,42 @@ function getChart(data, visualMap): ECOption {
                     // borderColor: 'transparent', // 修改字体颜色
                     formatter: function (params) {
                         const tooltipData = params?.data;
+
+                        const countryStr =
+                            params?.name !== 'Taiwan(中国省)'
+                                ? `<div>
+                        <span>国家:</span>
+                        <span>${tooltipData?.countryName}</span>
+                        <div>${tooltipData?.countryNameEn}</div>`
+                                : `<div>
+                        <span>${params?.name}</span>`;
+
                         let res = `<div >
-                        <div>
-                        <span >国家:</span>
-                        <span class="num">${tooltipData?.countryName}(${tooltipData?.countryNameEn})</span>
+                    ${countryStr}
                       </div>
                         <div>
-                          <span >总排名</span>
-                          <span class="num">${tooltipData?.value}</span>
+                          <span >总分</span>
+                          <span class="num">${tooltipData?.value?.toFixed(2)}</span>
                         </div>
                         <div >
                         <span >健康维度</span>
-                        <span class="num">${tooltipData?.health?.score}</span>
+                        <span class="num">${tooltipData?.health?.score?.toFixed(2)}</span>
                         </div>
                         <div >
                         <span >自然维度</span>
-                        <span class="num">${tooltipData?.nature?.score}</span>
+                        <span class="num">${tooltipData?.nature?.score?.toFixed(2)}</span>
                         </div>
                         <div >
                         <span >社会维度</span>
-                        <span class="num">${tooltipData?.psychology?.score}</span>
+                        <span class="num">${tooltipData?.psychology?.score?.toFixed(
+                            2,
+                        )}</span>
                         </div>
                         <div >
                         <span >心里维度</span>
-                        <span class="num">${tooltipData?.society?.score}</span>
+                        <span class="num">${tooltipData?.society?.score?.toFixed(
+                            2,
+                        )}</span>
                         </div>
                     </div>`;
                         return res;
