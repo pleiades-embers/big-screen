@@ -205,27 +205,27 @@ function getChart(data, visualMap): ECOption {
                       </div>
                         <div>
                           <span >总分</span>
-                          <span class="num">${tooltipData?.value?.toFixed(2)}</span>
+                          <span class="num">${tooltipData?.value?.toFixed(2) ?? "-"}</span>
                         </div>
                         <div >
                         <span >健康维度</span>
-                        <span class="num">${tooltipData?.health?.score?.toFixed(2)}</span>
+                        <span class="num">${tooltipData?.health?.score?.toFixed(2) ?? "-"}</span>
                         </div>
                         <div >
                         <span >自然维度</span>
-                        <span class="num">${tooltipData?.nature?.score?.toFixed(2)}</span>
+                        <span class="num">${tooltipData?.nature?.score?.toFixed(2) ?? "-"}</span>
                         </div>
                         <div >
                         <span >社会维度</span>
                         <span class="num">${tooltipData?.psychology?.score?.toFixed(
                             2,
-                        )}</span>
+                        ) ?? "-"}</span>
                         </div>
                         <div >
                         <span >心里维度</span>
                         <span class="num">${tooltipData?.society?.score?.toFixed(
                             2,
-                        )}</span>
+                        ) ?? "-"}</span>
                         </div>
                     </div>`;
                         return res;
