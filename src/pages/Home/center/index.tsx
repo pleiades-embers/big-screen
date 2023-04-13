@@ -96,7 +96,19 @@ export default function Center(props) {
         </div>
     );
 }
-
+var convertData = (data) => {
+    const res = []
+    for (let i = 0; i < data.length; i++) {
+        const geoCoord = data[i].name
+        if (geoCoord) {
+            res.push({
+                name: data[i].name,
+                value: geoCoord.concat(data[i].value)
+            })
+        }
+    }
+    return res
+}
 const mapOption = {
     series: {
         boxWidth: 110, //三维地图的宽度
@@ -174,17 +186,7 @@ function getChart(data, visualMap): ECOption {
                 map: 'Asia',
                 data: data,
                 ...mapOption.series,
-                // label: {
-                //     show: true, //是否显示市
-                //     textStyle: {
-                //         color: "#fff", //文字颜色
-                //         fontSize: 12, //文字大小
-                //         fontFamily: "微软雅黑",
-                //         backgroundColor: "rgba(0,0,0,0)", //透明度0清空文字背景
-                //     },
-                // },
                 tooltip: {
-                    show: true,
                     enterable: true, //鼠标可进入浮层内
                     // backgroundColor: 'transparent',
                     // borderColor: 'transparent', // 修改字体颜色
@@ -195,43 +197,66 @@ function getChart(data, visualMap): ECOption {
                             params?.name !== 'Taiwan(中国省)'
                                 ? `<div>
                         <span>国家:</span>
-                        <span>${tooltipData?.countryName}</span>
-                        <div>${tooltipData?.countryNameEn}</div>`
+                        <span>${tooltipData?.countryName ?? "-"}</span>
+                        <div>${tooltipData?.countryNameEn ?? ""}</div>`
                                 : `<div>
-                        <span>${params?.name}</span>`;
+                        <span>${params?.name ?? "-"}</span>`;
 
                         let res = `<div >
                     ${countryStr}
                       </div>
                         <div>
                           <span >总分</span>
-                          <span class="num">${tooltipData?.value?.toFixed(2) ?? "-"}</span>
+                          <span class="num">${tooltipData?.value?.toFixed(2) ?? '-'
+                            }</span>
                         </div>
                         <div >
                         <span >健康维度</span>
-                        <span class="num">${tooltipData?.health?.score?.toFixed(2) ?? "-"}</span>
+                        <span class="num">${tooltipData?.health?.score?.toFixed(2) ?? '-'
+                            }</span>
                         </div>
                         <div >
                         <span >自然维度</span>
-                        <span class="num">${tooltipData?.nature?.score?.toFixed(2) ?? "-"}</span>
+                        <span class="num">${tooltipData?.nature?.score?.toFixed(2) ?? '-'
+                            }</span>
                         </div>
                         <div >
                         <span >社会维度</span>
-                        <span class="num">${tooltipData?.psychology?.score?.toFixed(
-                            2,
-                        ) ?? "-"}</span>
+                        <span class="num">${tooltipData?.psychology?.score?.toFixed(2) ?? '-'
+                            }</span>
                         </div>
                         <div >
                         <span >心里维度</span>
-                        <span class="num">${tooltipData?.society?.score?.toFixed(
-                            2,
-                        ) ?? "-"}</span>
+                        <span class="num">${tooltipData?.society?.score?.toFixed(2) ?? '-'
+                            }</span>
                         </div>
                     </div>`;
                         return res;
                     },
                 },
+                label: {
+                    show: false,
+                    textStyle: {
+                        color: '#fff', //文字颜色
+                        fontSize: 16, //文字大小
+                        alignText: 'center',
+                        backgroundColor: '#1f64ca', //透明度0清空文字背景
+                        borderWidth: 1, //分界线宽度
+                        borderRadius: 3,
+                        padding: 4,
+                        borderColor: '#bfd8fe', //分界线颜色
+                    },
+                    formatter: function (params) { // 设置文字标签的显示内容
+                        if (params?.value) {
+                            return params?.value?.toFixed(2);
+                        } else {
+                            return "";
+                        }
+                    }
+                },
+
             },
+
         ],
         visualMap,
     };
