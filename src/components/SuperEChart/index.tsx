@@ -7,7 +7,10 @@ import type {
   PictorialBarSeriesOption,
   PieSeriesOption,
   SankeySeriesOption,
-  ScatterSeriesOption,
+  ScatterSeriesOption
+} from 'echarts/charts';
+import {
+  MapChart
 } from 'echarts/charts';
 import {
   BarChart,
@@ -102,7 +105,8 @@ echarts.use([
   Scatter3DChart,
   Geo3DComponent,
   Map3DChart,
-  VisualMapComponent
+  VisualMapComponent,
+  MapChart
 ]);
 
 // 自定义echart主题

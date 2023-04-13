@@ -131,9 +131,9 @@ const mapOption = {
             roughnessAdjust: 0,
         },
         viewControl: {
-            //投影方式，默认为透视投影'perspective'，也支持设置为正交投影'orthographic'。
-            projection: 'orthographic',
-            //正交投影此配置失效
+            // 投影方式，默认为透视投影'perspective'，也支持设置为正交投影'orthographic'。
+            // projection: 'orthographic',
+            // 正交投影此配置失效
             distance: 85,
             orthographicSize: 90,
             animation: false,
@@ -159,15 +159,10 @@ const mapOption = {
         },
     },
 };
-
 function getChart(data, visualMap): ECOption {
     return {
         tooltip: {
             show: true,
-            trigger: 'item',
-            enterable: true, //鼠标可进入浮层内
-            // backgroundColor: 'transparent',
-            // borderColor: 'transparent', // 修改字体颜色
             formatter: function (params) {
                 const tooltipData = params?.data;
 
@@ -180,10 +175,10 @@ function getChart(data, visualMap): ECOption {
                         : `<div>
                 <span>${params?.name ?? "-"}</span>`;
 
-                let res = `<div >
+                let res = `<div  id="map-tooltip">
             ${countryStr}
               </div>
-                <div>
+                <div  >
                   <span >总分</span>
                   <span class="num">${tooltipData?.value?.toFixed(2) ?? '-'
                     }</span>
@@ -217,12 +212,16 @@ function getChart(data, visualMap): ECOption {
                 name: '环太生命指数',
                 // @ts-ignore
                 //数据源
-                type: 'map3D',
+                type: 'map',
                 map: 'Asia',
                 data: data,
-                ...mapOption.series,
+                roam: true,
+                projection: {
+                    project: (point) => [point[0] / 180 * Math.PI, -Math.log(Math.tan((Math.PI / 2 + point[1] / 180 * Math.PI) / 2))],
+                    unproject: (point) => [point[0] * 180 / Math.PI, 2 * 180 / Math.PI * Math.atan(Math.exp(point[1])) - 90]
+                },
                 label: {
-                    show: false,
+                    show: true,
                     // @ts-ignore
                     textStyle: {
                         color: '#fff', //文字颜色
@@ -231,8 +230,8 @@ function getChart(data, visualMap): ECOption {
                         backgroundColor: '#1f64ca', //透明度0清空文字背景
                         borderWidth: 1, //分界线宽度
                         borderRadius: 3,
-                        padding: 4,
                         borderColor: '#bfd8fe', //分界线颜色
+                        zIndex: 10
                     },
                     formatter: function (params) { // 设置文字标签的显示内容
                         if (params?.value) {
@@ -243,10 +242,10 @@ function getChart(data, visualMap): ECOption {
                         }
                     }
                 },
-
+                ...mapOption.series,
             },
 
         ],
-        visualMap,
+        visualMap
     };
 }
