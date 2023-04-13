@@ -8,7 +8,11 @@ import { SuperEChart } from '@/components/SuperEChart';
 import { toAdaptedPx } from '@/utils';
 
 import { getBoardConfig } from '../boardCell';
+import downPng from "./down.png"
+import richPng from "./rich.png"
+import richArrow from "./richArrow.png"
 import styles from './style.module.less';
+import upPng from "./up.png"
 import WorldPalestine from './world.json';
 // @ts-ignore
 registerMap('Asia', WorldPalestine);
@@ -218,28 +222,60 @@ function getChart(data, visualMap): ECOption {
                 },
                 top: toAdaptedPx(180),
                 height: toAdaptedPx(450),
-                left: toAdaptedPx(10),
-                right: toAdaptedPx(70),
+                left: toAdaptedPx(20),
+                right: toAdaptedPx(20),
                 bottom: toAdaptedPx(0),
                 label: {
                     show: true,
                     // @ts-ignore
                     textStyle: {
                         color: '#fff', //文字颜色
-                        fontSize: 16, //文字大小
                         alignText: 'center',
-                        backgroundColor: '#1f64ca', //透明度0清空文字背景
-                        borderWidth: 1, //分界线宽度
-                        borderRadius: 3,
-                        borderColor: '#bfd8fe', //分界线颜色
-                        zIndex: 10
+                        // backgroundColor: '#1f64ca', //透明度0清空文字背景
+                        // borderWidth: 1, //分界线宽度
+                        // borderRadius: 3,
+                        // borderColor: '#bfd8fe', //分界线颜色
+                        zIndex: 10,
                     },
                     formatter: function (params) { // 设置文字标签的显示内容
                         if (params?.value) {
                             // @ts-ignore
-                            return params?.value?.toFixed(2);
+                            return `{bg|${params?.value?.toFixed(2)}}\n{arrow|}`;
                         } else {
                             return "";
+                        }
+                    },
+                    rich: {
+                        bg: {
+                            height: 20,
+                            width: 64,
+                            fontSize: 16,
+                            padding: [2, 6, -2, -4],
+                            backgroundColor: {
+                                image: richPng
+                            },
+                        },
+                        arrow: {
+                            width: 9,
+                            height: 10,
+                            padding: [-2, 0, 0, 0],
+                            backgroundColor: {
+                                image: richArrow
+                            },
+                        },
+                        up: {
+                            width: 8,
+                            height: 4,
+                            backgroundColor: {
+                                image: upPng
+                            },
+                        },
+                        down: {
+                            width: 8,
+                            height: 4,
+                            backgroundColor: {
+                                image: downPng
+                            },
                         }
                     }
                 },
