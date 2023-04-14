@@ -19,6 +19,6 @@ export function getBoardConfig(item) {
         <path d="M0 0L4 4L8 0H0Z" fill="#FF9B68"   class="board-svg"   />
       </svg>
       </span>`
-      : `<span style="height:10px;">${item.score?.toFixed(2)}</span>`,
+      : `<span style="height:10px;">${item.score?.toFixed(2)} -</span>`,
   ];
 }

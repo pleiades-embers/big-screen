@@ -9,8 +9,6 @@ import { toAdaptedPx } from '@/utils';
 
 import { getBoardConfig } from '../boardCell';
 import downPng from "./down.png"
-import richPng from "./rich.png"
-import richArrow from "./richArrow.png"
 import styles from './style.module.less';
 import upPng from "./up.png"
 import WorldPalestine from './world.json';
@@ -52,28 +50,49 @@ export default function Center(props) {
             }),
             visualMap: {
                 min: 0,
+                inverse: true,
+                width: 200,
                 type: 'piecewise',
                 splitNumber: 3,
                 orient: 'horizontal',
                 left: 'center',
                 bottom: '3%',
+                piecewise: true,
                 pieces: [
                     {
-                        lte: data?.total[0]?.score,
-                        gte: data?.total[9]?.score,
-                        label: 'Top1-Top10',
-                        color: '#ff7c72',
+                        lte: data?.total?.[0]?.score,
+                        gte: data?.total?.[2]?.score,
+                        label: 'Top1-Top3',
+                        color: '#c3403b',
                     },
                     {
-                        lte: data?.total[10]?.score,
-                        gte: data?.total[19]?.score,
-                        label: 'Top11-Top20',
-                        color: '#f23829',
+                        lte: data?.total?.[3]?.score,
+                        gte: data?.total?.[9]?.score,
+                        label: 'Top4-Top10',
+                        color: '#de7957',
                     },
                     {
-                        lte: data?.total[20]?.score,
-                        label: 'Top20及以下',
-                        color: '#a61f15',
+                        lte: data?.total?.[10]?.score,
+                        gte: data?.total?.[14]?.score,
+                        label: 'Top11-Top15',
+                        color: '#f5ae6e',
+                    },
+                    {
+                        lte: data?.total?.[10]?.score,
+                        gte: data?.total?.[14]?.score,
+                        label: 'Top11-Top15',
+                        color: '#f5ae6e',
+                    },
+                    {
+                        lte: data?.total?.[15]?.score,
+                        gte: data?.total?.[19]?.score,
+                        label: 'Top11-Top15',
+                        color: '#fbdc8c',
+                    },
+                    {
+                        lte: data?.total?.[20]?.score,
+                        label: 'Top20以下',
+                        color: '#fcf5bf',
                     },
                 ],
                 textStyle: {
@@ -237,42 +256,39 @@ function getChart(data, visualMap): ECOption {
                         // borderColor: '#bfd8fe', //分界线颜色
                         zIndex: 10,
                     },
-                    formatter: function (params) { // 设置文字标签的显示内容
+                    // @ts-ignore
+                    formatter: function (params: any) { // 设置文字标签的显示内容
                         if (params?.value) {
-                            // @ts-ignore
-                            return `{bg|${params?.value?.toFixed(2)}}\n{arrow|}`;
+                            console.log(params, "params")
+                            if (params?.data?.isGrowth === "rise") {
+                                return `{up|${params?.value?.toFixed(2)}}`;
+                            }
+
+                            if (params?.data?.isGrowth === "fall") {
+                                return `{down|${params?.value?.toFixed(2)}}`;
+                            }
+                            if (params?.data?.isGrowth === "unchanged") {
+                                return `${params?.value?.toFixed(2)} -`;
+                            }
                         } else {
                             return "";
                         }
                     },
                     rich: {
-                        bg: {
-                            height: 20,
-                            width: 64,
-                            fontSize: 16,
-                            padding: [2, 6, -2, -4],
-                            backgroundColor: {
-                                image: richPng
-                            },
-                        },
-                        arrow: {
-                            width: 9,
-                            height: 10,
-                            padding: [-2, 0, 0, 0],
-                            backgroundColor: {
-                                image: richArrow
-                            },
-                        },
                         up: {
-                            width: 8,
-                            height: 4,
+                            width: 50,
+                            height: 24,
+                            fontSize: 12,
+                            padding: [-2, 8, 0, -4],
                             backgroundColor: {
                                 image: upPng
                             },
                         },
                         down: {
-                            width: 8,
-                            height: 4,
+                            width: 50,
+                            height: 24,
+                            fontSize: 12,
+                            padding: [-2, 8, 0, -4],
                             backgroundColor: {
                                 image: downPng
                             },
