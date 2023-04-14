@@ -34,6 +34,7 @@ export default function Center(props) {
         }
         let arr = structuredClone(data?.total);
 
+
         return {
             mapData: arr.map((item) => {
                 return {
@@ -43,7 +44,7 @@ export default function Center(props) {
                     health: data.health.find((item2) => item.countryName === item2.countryName),
                     nature: data.nature.find((item2) => item.countryName === item2.countryName),
                     psychology: data.psychology.find(
-                        (item2) => item.countryName === item2.countryName,
+                        (item2) => item.countryNameEn === item2.countryNameEn,
                     ),
                     society: data.society.find((item2) => item.countryName === item2.countryName),
                 };
@@ -184,7 +185,6 @@ function getChart(data, visualMap): ECOption {
             show: true,
             formatter: function (params) {
                 const tooltipData = params?.data;
-
                 const countryStr =
                     params?.name !== 'Taiwan(中国省)'
                         ? `<div>
@@ -214,12 +214,12 @@ function getChart(data, visualMap): ECOption {
                 </div>
                 <div >
                 <span >社会维度</span>
-                <span class="num">${tooltipData?.psychology?.score?.toFixed(2) ?? '-'
+                <span class="num">${tooltipData?.society?.score?.toFixed(2) ?? '-'
                     }</span>
                 </div>
                 <div >
-                <span >心里维度</span>
-                <span class="num">${tooltipData?.society?.score?.toFixed(2) ?? '-'
+                <span >心理维度</span>
+                <span class="num">${tooltipData?.psychology?.score?.toFixed(2) ?? '-'
                     }</span>
                 </div>
             </div>`;
