@@ -195,12 +195,12 @@ function getChart(data, visualMap): ECOption {
                 </div>
                 <div >
                 <span >社会维度</span>
-                <span class="num">${tooltipData?.psychology?.score?.toFixed(2) ?? '-'
+                <span class="num">${tooltipData?.society?.score?.toFixed(2) ?? '-'
                     }</span>
                 </div>
                 <div >
-                <span >心里维度</span>
-                <span class="num">${tooltipData?.society?.score?.toFixed(2) ?? '-'
+                <span >心理维度</span>
+                <span class="num">${tooltipData?.psychology?.score?.toFixed(2) ?? '-'
                     }</span>
                 </div>
             </div>`;
