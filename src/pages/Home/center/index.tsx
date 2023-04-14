@@ -81,18 +81,18 @@ export default function Center(props) {
                         lte: data?.total?.[10]?.score,
                         gte: data?.total?.[14]?.score,
                         label: 'Top11-Top15',
-                        color: '#f5ae6e',
+                        color: '#fcd8a6',
                     },
                     {
                         lte: data?.total?.[15]?.score,
                         gte: data?.total?.[19]?.score,
                         label: 'Top11-Top15',
-                        color: '#de7957',
+                        color: '#f5ae6e',
                     },
                     {
                         lte: data?.total?.[20]?.score,
                         label: 'Top20以下',
-                        color: '#c3403b',
+                        color: '#faab40',
                     },
                 ],
                 textStyle: {
