@@ -8,9 +8,9 @@ import { SuperEChart } from '@/components/SuperEChart';
 import { toAdaptedPx } from '@/utils';
 
 import { getBoardConfig } from '../boardCell';
-import downPng from "./down.png"
+import downPng from './down.png';
 import styles from './style.module.less';
-import upPng from "./up.png"
+import upPng from './up.png';
 import WorldPalestine from './world.json';
 // @ts-ignore
 registerMap('Asia', WorldPalestine);
@@ -33,7 +33,6 @@ export default function Center(props) {
             };
         }
         let arr = structuredClone(data?.total);
-
 
         return {
             mapData: arr.map((item) => {
@@ -64,13 +63,13 @@ export default function Center(props) {
                         lte: data?.total?.[0]?.score,
                         gte: data?.total?.[2]?.score,
                         label: 'Top1-Top3',
-                        color: '#c3403b',
+                        color: '#fcf5bf',
                     },
                     {
                         lte: data?.total?.[3]?.score,
                         gte: data?.total?.[9]?.score,
                         label: 'Top4-Top10',
-                        color: '#de7957',
+                        color: '#fbdc8c',
                     },
                     {
                         lte: data?.total?.[10]?.score,
@@ -88,12 +87,12 @@ export default function Center(props) {
                         lte: data?.total?.[15]?.score,
                         gte: data?.total?.[19]?.score,
                         label: 'Top11-Top15',
-                        color: '#fbdc8c',
+                        color: '#de7957',
                     },
                     {
                         lte: data?.total?.[20]?.score,
                         label: 'Top20以下',
-                        color: '#fcf5bf',
+                        color: '#c3403b',
                     },
                 ],
                 textStyle: {
@@ -189,33 +188,29 @@ function getChart(data, visualMap): ECOption {
                     params?.name !== 'Taiwan(中国省)'
                         ? `<div>
                 <span>国家:</span>
-                <span>${tooltipData?.countryName ?? "-"}</span>
-                <div>${tooltipData?.countryNameEn ?? ""}</div>`
+                <span>${tooltipData?.countryName ?? '-'}</span>
+                <div>${tooltipData?.countryNameEn ?? ''}</div>`
                         : `<div>
-                <span>${params?.name ?? "-"}</span>`;
+                <span>${params?.name ?? '-'}</span>`;
 
                 let res = `<div  id="map-tooltip">
             ${countryStr}
               </div>
                 <div  >
                   <span >总分</span>
-                  <span class="num">${tooltipData?.value?.toFixed(2) ?? '-'
-                    }</span>
+                  <span class="num">${tooltipData?.value?.toFixed(2) ?? '-'}</span>
                 </div>
                 <div >
                 <span >健康维度</span>
-                <span class="num">${tooltipData?.health?.score?.toFixed(2) ?? '-'
-                    }</span>
+                <span class="num">${tooltipData?.health?.score?.toFixed(2) ?? '-'}</span>
                 </div>
                 <div >
                 <span >自然维度</span>
-                <span class="num">${tooltipData?.nature?.score?.toFixed(2) ?? '-'
-                    }</span>
+                <span class="num">${tooltipData?.nature?.score?.toFixed(2) ?? '-'}</span>
                 </div>
                 <div >
                 <span >社会维度</span>
-                <span class="num">${tooltipData?.society?.score?.toFixed(2) ?? '-'
-                    }</span>
+                <span class="num">${tooltipData?.society?.score?.toFixed(2) ?? '-'}</span>
                 </div>
                 <div >
                 <span >心理维度</span>
@@ -236,8 +231,14 @@ function getChart(data, visualMap): ECOption {
                 data: data,
                 roam: true,
                 projection: {
-                    project: (point) => [point[0] / 180 * Math.PI, -Math.log(Math.tan((Math.PI / 2 + point[1] / 180 * Math.PI) / 2))],
-                    unproject: (point) => [point[0] * 180 / Math.PI, 2 * 180 / Math.PI * Math.atan(Math.exp(point[1])) - 90]
+                    project: (point) => [
+                        (point[0] / 180) * Math.PI,
+                        -Math.log(Math.tan((Math.PI / 2 + (point[1] / 180) * Math.PI) / 2)),
+                    ],
+                    unproject: (point) => [
+                        (point[0] * 180) / Math.PI,
+                        ((2 * 180) / Math.PI) * Math.atan(Math.exp(point[1])) - 90,
+                    ],
                 },
                 top: toAdaptedPx(180),
                 height: toAdaptedPx(450),
@@ -257,21 +258,22 @@ function getChart(data, visualMap): ECOption {
                         zIndex: 10,
                     },
                     // @ts-ignore
-                    formatter: function (params: any) { // 设置文字标签的显示内容
+                    formatter: function (params: any) {
+                        // 设置文字标签的显示内容
                         if (params?.value) {
-                            console.log(params, "params")
-                            if (params?.data?.isGrowth === "rise") {
+                            console.log(params, 'params');
+                            if (params?.data?.isGrowth === 'rise') {
                                 return `{up|${params?.value?.toFixed(2)}}`;
                             }
 
-                            if (params?.data?.isGrowth === "fall") {
+                            if (params?.data?.isGrowth === 'fall') {
                                 return `{down|${params?.value?.toFixed(2)}}`;
                             }
-                            if (params?.data?.isGrowth === "unchanged") {
+                            if (params?.data?.isGrowth === 'unchanged') {
                                 return `${params?.value?.toFixed(2)} -`;
                             }
                         } else {
-                            return "";
+                            return '';
                         }
                     },
                     rich: {
@@ -281,7 +283,7 @@ function getChart(data, visualMap): ECOption {
                             fontSize: 12,
                             padding: [-2, 8, 0, -4],
                             backgroundColor: {
-                                image: upPng
+                                image: upPng,
                             },
                         },
                         down: {
@@ -290,10 +292,10 @@ function getChart(data, visualMap): ECOption {
                             fontSize: 12,
                             padding: [-2, 8, 0, -4],
                             backgroundColor: {
-                                image: downPng
+                                image: downPng,
                             },
-                        }
-                    }
+                        },
+                    },
                 },
                 itemStyle: {
                     opacity: 1, // 透明度
@@ -302,8 +304,7 @@ function getChart(data, visualMap): ECOption {
                 },
                 // ...mapOption.series,
             },
-
         ],
-        visualMap
+        visualMap,
     };
 }
