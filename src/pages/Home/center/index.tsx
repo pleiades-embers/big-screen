@@ -61,39 +61,62 @@ export default function Center(props) {
                 pieces: [
                     {
                         lte: data?.total?.[0]?.score,
-                        gte: data?.total?.[2]?.score,
-                        label: 'Top1-Top3',
-                        color: '#fcf5bf',
-                    },
-                    {
-                        lte: data?.total?.[3]?.score,
                         gte: data?.total?.[9]?.score,
-                        label: 'Top4-Top10',
-                        color: '#fbdc8c',
+                        label: 'Top1-Top10',
+                        color: '#d4efff',
                     },
                     {
                         lte: data?.total?.[10]?.score,
-                        gte: data?.total?.[14]?.score,
-                        label: 'Top11-Top15',
-                        color: '#f5ae6e',
-                    },
-                    {
-                        lte: data?.total?.[10]?.score,
-                        gte: data?.total?.[14]?.score,
-                        label: 'Top11-Top15',
-                        color: '#fcd8a6',
-                    },
-                    {
-                        lte: data?.total?.[15]?.score,
                         gte: data?.total?.[19]?.score,
-                        label: 'Top11-Top15',
-                        color: '#f5ae6e',
+                        label: 'Top4-Top10',
+                        color: '#91d2f8',
                     },
                     {
                         lte: data?.total?.[20]?.score,
-                        label: 'Top20以下',
-                        color: '#faab40',
+                        gte: data?.total?.[29]?.score,
+                        label: 'Top21-Top30',
+                        color: '#5192b7',
                     },
+                    {
+                        lte: data?.total?.[30]?.score,
+                        label: 'Top30以下',
+                        color: '#164c6a',
+                    },
+                    // {
+                    //     lte: data?.total?.[0]?.score,
+                    //     gte: data?.total?.[2]?.score,
+                    //     label: 'Top1-Top3',
+                    //     color: '#fcf5bf',
+                    // },
+                    // {
+                    //     lte: data?.total?.[3]?.score,
+                    //     gte: data?.total?.[9]?.score,
+                    //     label: 'Top4-Top10',
+                    //     color: '#fbdc8c',
+                    // },
+                    // {
+                    //     lte: data?.total?.[10]?.score,
+                    //     gte: data?.total?.[14]?.score,
+                    //     label: 'Top11-Top15',
+                    //     color: '#f5ae6e',
+                    // },
+                    // {
+                    //     lte: data?.total?.[10]?.score,
+                    //     gte: data?.total?.[14]?.score,
+                    //     label: 'Top11-Top15',
+                    //     color: '#fcd8a6',
+                    // },
+                    // {
+                    //     lte: data?.total?.[15]?.score,
+                    //     gte: data?.total?.[19]?.score,
+                    //     label: 'Top11-Top15',
+                    //     color: '#f5ae6e',
+                    // },
+                    // {
+                    //     lte: data?.total?.[20]?.score,
+                    //     label: 'Top20以下',
+                    //     color: '#faab40',
+                    // },
                 ],
                 textStyle: {
                     color: 'white',
@@ -227,6 +250,7 @@ function getChart(data, visualMap): ECOption {
                 // @ts-ignore
                 //数据源
                 type: 'map',
+
                 map: 'Asia',
                 data: data,
                 roam: true,
@@ -263,14 +287,14 @@ function getChart(data, visualMap): ECOption {
                         if (params?.value) {
                             console.log(params, 'params');
                             if (params?.data?.isGrowth === 'rise') {
-                                return `{up|${params?.value?.toFixed(2)}}`;
+                                return `{up|}`;
                             }
 
                             if (params?.data?.isGrowth === 'fall') {
-                                return `{down|${params?.value?.toFixed(2)}}`;
+                                return `{down|}`;
                             }
                             if (params?.data?.isGrowth === 'unchanged') {
-                                return `${params?.value?.toFixed(2)} -`;
+                                return `-`;
                             }
                         } else {
                             return '';
@@ -278,19 +302,15 @@ function getChart(data, visualMap): ECOption {
                     },
                     rich: {
                         up: {
-                            width: 50,
-                            height: 24,
-                            fontSize: 12,
-                            padding: [-2, 8, 0, -4],
+                            width: 7.78,
+                            height: 10,
                             backgroundColor: {
                                 image: upPng,
                             },
                         },
                         down: {
-                            width: 50,
-                            height: 24,
-                            fontSize: 12,
-                            padding: [-2, 8, 0, -4],
+                            width: 7.78,
+                            height: 10,
                             backgroundColor: {
                                 image: downPng,
                             },
