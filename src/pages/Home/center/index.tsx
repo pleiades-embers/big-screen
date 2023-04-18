@@ -68,7 +68,7 @@ export default function Center(props) {
                     {
                         lte: data?.total?.[10]?.score,
                         gte: data?.total?.[19]?.score,
-                        label: 'Top4-Top10',
+                        label: 'Top11-Top20',
                         color: '#91d2f8',
                     },
                     {
