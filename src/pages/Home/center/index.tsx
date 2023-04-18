@@ -298,7 +298,7 @@ function getChart(data, visualMap): ECOption {
                                 return `{down|}`;
                             }
                             if (params?.data?.isGrowth === 'unchanged') {
-                                return `{unChange|-}`;
+                                return `{unChange|}`;
                             }
                         } else {
                             return '';
@@ -306,9 +306,9 @@ function getChart(data, visualMap): ECOption {
                     },
                     rich: {
                         unChange: {
+                            width: 10,
+                            height: 10,
                             fontSize: 16,
-                            color: "white",
-                            width: 12,
                             backgroundColor: {
                                 image: unchangedPng,
                             },
