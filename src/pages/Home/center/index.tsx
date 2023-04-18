@@ -10,6 +10,7 @@ import { toAdaptedPx } from '@/utils';
 import { getBoardConfig } from '../boardCell';
 import downPng from './down.png';
 import styles from './style.module.less';
+import unchangedPng from './unchanged.png';
 import upPng from './up.png';
 import WorldPalestine from './world.json';
 // @ts-ignore
@@ -305,8 +306,12 @@ function getChart(data, visualMap): ECOption {
                     },
                     rich: {
                         unChange: {
-                            fontWeight: "bold",
-                            fontSize: 16
+                            fontSize: 16,
+                            color: "white",
+                            width: 12,
+                            backgroundColor: {
+                                image: unchangedPng,
+                            },
                         },
                         up: {
                             width: 7.78,
