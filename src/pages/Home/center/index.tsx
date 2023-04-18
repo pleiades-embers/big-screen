@@ -306,6 +306,7 @@ function getChart(data, visualMap): ECOption {
                     rich: {
                         unChange: {
                             fontWeight: "bold",
+                            fontSize: 16
                         },
                         up: {
                             width: 7.78,
