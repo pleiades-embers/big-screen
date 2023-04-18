@@ -219,6 +219,10 @@ function getChart(data, visualMap): ECOption {
                 let res = `<div  id="map-tooltip">
             ${countryStr}
               </div>
+              <div  >
+              <span >总排名</span>
+              <span class="num">${tooltipData?.sortNum ?? "-"}</span>
+            </div>
                 <div  >
                   <span >总分</span>
                   <span class="num">${tooltipData?.value?.toFixed(2) ?? '-'}</span>
