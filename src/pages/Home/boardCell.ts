@@ -16,9 +16,11 @@ export function getBoardConfig(item) {
         )}<svg style="vertical-align:middle;" width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
       
 
-        <path d="M0 0L4 4L8 0H0Z" fill="#bdff6e"   class="board-svg"   />
+        <path d="M0 0L4 4L8 0H0Z" fill="#83d423"   class="board-svg"   />
       </svg>
       </span>`
-      : `<span style="height:10px;">${item.score?.toFixed(2)} -</span>`,
+      : `<span style="height:10px;">${item.score?.toFixed(
+          2,
+        )} <span style="font-weight:bold;">-</span></span>`,
   ];
 }
