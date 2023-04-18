@@ -289,7 +289,6 @@ function getChart(data, visualMap): ECOption {
                     formatter: function (params: any) {
                         // 设置文字标签的显示内容
                         if (params?.value) {
-                            console.log(params, 'params');
                             if (params?.data?.isGrowth === 'rise') {
                                 return `{up|}`;
                             }
@@ -298,13 +297,16 @@ function getChart(data, visualMap): ECOption {
                                 return `{down|}`;
                             }
                             if (params?.data?.isGrowth === 'unchanged') {
-                                return `-`;
+                                return `{unChange|-}`;
                             }
                         } else {
                             return '';
                         }
                     },
                     rich: {
+                        unChange: {
+                            fontWeight: "bold",
+                        },
                         up: {
                             width: 7.78,
                             height: 10,
