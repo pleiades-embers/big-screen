@@ -47,7 +47,8 @@
     "react": "^18.2.0",
     "react-countup": "^4.3.3",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "react-tooltip": "^5.11.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",

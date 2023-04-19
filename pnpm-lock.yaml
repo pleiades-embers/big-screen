@@ -46,6 +46,7 @@ specifiers:
   react-countup: ^4.3.3
   react-dom: ^18.2.0
   react-router-dom: ^6.3.0
+  react-tooltip: ^5.11.1
   stylelint: ^14.5.3
   stylelint-config-prettier: ^9.0.3
   stylelint-config-rational-order: ^0.1.2
@@ -75,6 +76,7 @@ dependencies:
   react-countup: 4.4.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
+  react-tooltip: 5.11.1_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@commitlint/cli': 16.3.0
@@ -636,6 +638,16 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@floating-ui/core/1.2.6:
+    resolution: {integrity: sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==}
+    dev: false
+
+  /@floating-ui/dom/1.2.6:
+    resolution: {integrity: sha512-02vxFDuvuVPs22iJICacezYJyf7zwwOCWkPNkWNBr1U0Qt1cKFYzWvxts0AmqcOQGwt/3KJWcWIgtbUU38keyw==}
+    dependencies:
+      '@floating-ui/core': 1.2.6
+    dev: false
 
   /@humanwhocodes/config-array/0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
@@ -5368,6 +5380,18 @@ packages:
     dependencies:
       '@remix-run/router': 1.2.1
       react: 18.2.0
+    dev: false
+
+  /react-tooltip/5.11.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-+2a/DvmOlPQd5e1f3s32E/+vv4Tv4UmPxZfCyeVr4BeY3SRCEKGHiE36jH+UtqxSuRP9TKviwmhow4gNDRXCMQ==}
+    peerDependencies:
+      react: '>=16.14.0'
+      react-dom: '>=16.14.0'
+    dependencies:
+      '@floating-ui/dom': 1.2.6
+      classnames: 2.3.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react/18.2.0:

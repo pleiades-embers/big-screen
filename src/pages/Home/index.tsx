@@ -6,6 +6,7 @@ import { CanvasBg } from '@/components/CanvasBg';
 import { postDetailRank } from '@/services/page';
 
 import Center from './center';
+import CopyRight from './CopyRight';
 import Left from './left';
 import Right from './right';
 import styles from './style.module.less';
@@ -36,6 +37,7 @@ export default function HomePage() {
       <Left health={health} nature={nature}></Left>
       <Center data={data}></Center>
       <Right psychology={psychology} society={society}></Right>
+      <CopyRight></CopyRight>
     </div>
   );
 }
