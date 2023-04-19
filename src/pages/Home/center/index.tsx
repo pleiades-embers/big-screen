@@ -10,6 +10,7 @@ import { toAdaptedPx } from '@/utils';
 import { getBoardConfig } from '../boardCell';
 import downPng from './down.png';
 import styles from './style.module.less';
+import unchangedPng from './unchanged.png';
 import upPng from './up.png';
 import WorldPalestine from './world.json';
 // @ts-ignore
@@ -219,6 +220,10 @@ function getChart(data, visualMap): ECOption {
                 let res = `<div  id="map-tooltip">
             ${countryStr}
               </div>
+              <div  >
+              <span >总排名</span>
+              <span class="num">${tooltipData?.sortNum ?? "-"}</span>
+            </div>
                 <div  >
                   <span >总分</span>
                   <span class="num">${tooltipData?.value?.toFixed(2) ?? '-'}</span>
@@ -285,7 +290,6 @@ function getChart(data, visualMap): ECOption {
                     formatter: function (params: any) {
                         // 设置文字标签的显示内容
                         if (params?.value) {
-                            console.log(params, 'params');
                             if (params?.data?.isGrowth === 'rise') {
                                 return `{up|}`;
                             }
@@ -294,13 +298,21 @@ function getChart(data, visualMap): ECOption {
                                 return `{down|}`;
                             }
                             if (params?.data?.isGrowth === 'unchanged') {
-                                return `-`;
+                                return `{unChange|}`;
                             }
                         } else {
                             return '';
                         }
                     },
                     rich: {
+                        unChange: {
+                            width: 10,
+                            height: 10,
+                            fontSize: 16,
+                            backgroundColor: {
+                                image: unchangedPng,
+                            },
+                        },
                         up: {
                             width: 7.78,
                             height: 10,
