@@ -57,7 +57,7 @@ export default function Center(props) {
                 splitNumber: 3,
                 orient: 'horizontal',
                 left: 'center',
-                bottom: '10%',
+                bottom: '5%',
                 piecewise: true,
                 pieces: [
                     {
@@ -269,7 +269,7 @@ function getChart(data, visualMap): ECOption {
                         ((2 * 180) / Math.PI) * Math.atan(Math.exp(point[1])) - 90,
                     ],
                 },
-                top: toAdaptedPx(140),
+                top: toAdaptedPx(175),
                 height: toAdaptedPx(450),
                 left: toAdaptedPx(20),
                 right: toAdaptedPx(20),
