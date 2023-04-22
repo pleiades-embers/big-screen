@@ -56,9 +56,20 @@ function getChart(data): ECOption {
                 fontWeight: "lighter",
             }
         },
+        tooltip: {
+            trigger: "axis",
+        },
         xAxis: {
             type: 'category',
-            data: (data ?? []).map(item => item.dateTime)
+            boundaryGap: false,
+            data: (data ?? []).map(item => item.dateTime),
+            axisLine: {
+                lineStyle: {
+                    color: "#bae7ff",
+                    width: toAdaptedPx(1)
+                }
+            },
+
         },
         legend: {
             data: ['传染病A'],
@@ -79,7 +90,24 @@ function getChart(data): ECOption {
             },
         ],
         yAxis: {
-            type: 'value'
+            type: 'value',
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    type: 'dashed',
+                    color: '#E6F7FF',
+                    width: toAdaptedPx(1)
+                },
+            },
+            axisLabel: {
+                // @ts-ignore
+                textStyle: {
+                    fontSize: toAdaptedPx(12),
+                    color: "#fff",
+                    fontFamily: 'AlibabaPuHuiTi-2-45-Light'
+                }
+            },
+
         },
         series: [
             {
