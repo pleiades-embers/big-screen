@@ -1,0 +1,32 @@
+.left {
+  position: absolute;
+  top: 160px;
+  left: 18px;
+  z-index: 10;
+  width: 464px;
+  display: grid;
+  grid-template-columns: 464px;
+  grid-template-rows: 286px 592px;
+  row-gap: 10px;
+  > div:nth-child(1) {
+    width: 464px;
+    height: 286px;
+    border: 1px solid rgba(44, 166, 255, 0.4);
+    box-sizing: border-box;
+    > img {
+      height: 50px;
+      width: 102%;
+      margin-left: -6px;
+    }
+  }
+  > div:nth-child(2) {
+    width: 464px;
+    height: 592px;
+    border: 1px solid rgba(44, 166, 255, 0.4);
+    box-sizing: border-box;
+    > img {
+      height: 50px;
+      width: 102%;
+    }
+  }
+}

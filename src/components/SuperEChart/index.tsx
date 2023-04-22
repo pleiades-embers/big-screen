@@ -1,3 +1,5 @@
+import 'echarts-wordcloud';
+
 import { useSize } from 'ahooks';
 import type {
   BarSeriesOption,
