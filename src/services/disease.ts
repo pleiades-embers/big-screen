@@ -10,8 +10,8 @@ export async function getCityRankByWord(query) {
 }
 
 //传染病趋势图
-export async function getRiseRank() {
-    return await request.get('/vital/screen/riseRank');
+export async function getRiseRank(params) {
+    return await request.get(`/vital/screen/riseRank?wordName=${params.wordName}&timeType=${params.timeType}`);
 }
 
 

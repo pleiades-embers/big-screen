@@ -7,6 +7,7 @@ import { getCityRankByWord } from '@/services/disease';
 
 import Center from './center';
 import Left from './left';
+import Right from './right';
 import styles from './style.module.less';
 export default function Disease() {
     const { data } = useRequest(() => getCityRankByWord('influenza'));
@@ -18,6 +19,7 @@ export default function Disease() {
             </div>
             <Left dataRank={data}></Left>
             <Center data={data}></Center>
+            <Right></Right>
         </div>
     );
 }

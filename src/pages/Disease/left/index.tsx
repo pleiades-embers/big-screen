@@ -55,19 +55,18 @@ function getChart(data): ECOption {
                 type: 'wordCloud',
                 shape: 'circle',
                 keepAspect: false,
-                width: '94%',
+                width: '90%',
                 height: '90%',
-                right: '3%',
+                right: '6%',
                 left: '3%',
                 top: '0%',
                 bottom: '10%',
-                sizeRange: [18, 36],
+                sizeRange: [12, 28],
                 rotationRange: [0, 0],
-                gridSize: 16,
+                gridSize: 10,
                 textStyle: {
                     // fontFamily: 'PingFangSC',
-                    fontFamily: 'AlibabaPuHuiTi-2',
-                    fontWeight: 'bold',
+                    fontFamily: 'AlibabaPuHuiTi-2-85-Bold',
                     color: function () {
                         let colors = ['#46DADB', '#3254DD', '#BEE5FB', '#C6FFAA'];
                         //@ts-ignore

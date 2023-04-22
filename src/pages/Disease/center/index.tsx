@@ -166,9 +166,9 @@ function getChart(data): ECOption {
                 },
                 top: toAdaptedPx(175),
                 height: toAdaptedPx(520),
-                width: toAdaptedPx(860),
-                left: toAdaptedPx(20),
-                right: toAdaptedPx(20),
+                width: toAdaptedPx(880),
+                left: toAdaptedPx(0),
+                right: toAdaptedPx(30),
                 bottom: toAdaptedPx(0),
                 label: {
                     show: true,
