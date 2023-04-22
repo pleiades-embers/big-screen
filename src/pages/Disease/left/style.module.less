@@ -30,3 +30,54 @@
     }
   }
 }
+
+.list {
+  width: 464px;
+  height: 562px;
+  padding-top: 10px;
+  padding-left: 13px;
+  padding-bottom: 30px;
+  padding-right: 13px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-sizing: border-box;
+  .listItem {
+    margin-bottom: 20px;
+    > div:nth-child(1) {
+      display: grid;
+      grid-template-columns: max-content max-content 1fr;
+      grid-template-rows: repeat(auto-fill, max-content);
+      > .title {
+        font-family: 'Alibaba PuHuiTi 2.0';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        color: #e6f7ff;
+      }
+      > .value {
+        font-family: 'Furore';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        color: #fff;
+        text-align: right;
+      }
+    }
+    .progressBar {
+      width: 438px;
+      height: 8px;
+      box-sizing: border-box;
+      background-color: #37424c;
+      border-radius: 8px;
+      position: relative;
+      > div {
+        background: linear-gradient(270deg, #3f95ce 0%, #1ee7e7 100%);
+        border-radius: 8px;
+        height: 8px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+}
