@@ -5,17 +5,16 @@ import WorldCloudTitlePng from '@/assets/disease/world-cloud-title.png';
 import { AutoScrollView } from '@/components/AutoScrollView';
 import type { ECOption } from '@/components/SuperEChart';
 import { SuperEChart } from '@/components/SuperEChart';
-import { getCityRankByWord, getWordsCloud } from '@/services/disease';
+import { getWordsCloud } from '@/services/disease';
 
 import styles from './style.module.less';
 
-export default function Left() {
+export default function Left(props) {
     /**
      * 词云
      */
     const { data } = useRequest(getWordsCloud);
-    const { data: dataRank } = useRequest(() => getCityRankByWord('influenza'));
-    console.log(dataRank, 'dataRank');
+    const { dataRank } = props
 
     return (
         <div className={styles.left}>

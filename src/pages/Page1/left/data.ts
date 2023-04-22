@@ -282,6 +282,7 @@ export const getCarouselChart = (): ECOption => {
         itemStyle: {
           shadowColor: '#00345F',
           shadowOffsetX: 0,
+          //@ts-ignore
           shadowOffsetY: toAdaptedPx(2),
           shadowBlur: toAdaptedPx(6),
         },
