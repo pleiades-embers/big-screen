@@ -114,6 +114,26 @@ function getChart(data): ECOption {
                 name: "传染病A",
                 data: (data ?? [])?.map(item => item.value),
                 type: 'line',
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [
+                            {
+                                offset: 0,
+                                color: "#4E8BFF", // 0% 处的颜色
+                            },
+                            {
+                                offset: 1,
+                                color: 'rgba(0, 0, 0, 0)', // 0% 处的颜色
+                            },
+                        ],
+                        global: false,
+                    },
+                }
             }
         ]
     };
