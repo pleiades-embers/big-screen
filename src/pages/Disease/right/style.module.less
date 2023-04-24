@@ -17,6 +17,32 @@
       height: 50px;
       width: 102%;
     }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 34px);
+      grid-template-rows: 27px;
+      column-gap: 8px;
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      > div {
+        width: 34px;
+        height: 27px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        text-align: center;
+        font-family: 'PingFang SC';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        box-sizing: border-box;
+        line-height: 27px;
+      }
+    }
+    .tabActive {
+      color: #39a2fa;
+      border: 1px solid #39a2fa !important;
+    }
   }
   > div:nth-child(2) {
     width: 464px;
@@ -26,6 +52,32 @@
     > img {
       height: 50px;
       width: 102%;
+    }
+  }
+}
+.diseaseDetail {
+  padding: 10px;
+  box-sizing: border-box;
+  :global {
+    .dv-scroll-board {
+      .header {
+        background: linear-gradient(
+          0deg,
+          #1c3b68 -24.83%,
+          rgba(47, 61, 82, 0.0884779) 140%
+        );
+        border-bottom: rgba(40, 145, 246, 0.44) 2px solid;
+      }
+      .row-item {
+        > div {
+          > span {
+            font-family: 'Alibaba PuHuiTi 2.0';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+          }
+        }
+      }
     }
   }
 }
