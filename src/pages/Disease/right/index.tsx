@@ -28,28 +28,25 @@ export default function Right() {
                 cityRank: []
             }
         }
-        return { trend: data.trend, cityRank: data.cityRank }
+        return {
+            trend: data.trend, cityRank: data.cityRank.map(item => {
+                return [`${item.countryName}`, item.addedNum ?? "-", item.total, "-"]
+            })
+        }
 
     }, [data])
 
-    console.log(cityRank)
     const tableConfig = {
-        waitTime: 3000,
+        waitTime: 2000,
         hoverPause: true,
         headerHeight: toAdaptedPx(50),
         headerBGC: 'linear-gradient(0deg, #1C3B68 -24.83%, rgba(47, 61, 82, 0.0884779) 140%)',
-        oddRowBGC: 'transparent',
-        evenRowBGC: 'rgba(255, 255, 255, 0.17)',
+        oddRowBGC: 'rgba(255, 255, 255, 0.17)',
+        evenRowBGC: 'transparent',
         header: ['国家(Country)', '新增', '累计', "治愈"],
-        columnWidth: [toAdaptedPx(180), toAdaptedPx(140)],
-        data: new Array(90).fill(0).map(() => {
-            return [
-                `杭州${~~(Math.random() * 80000)}有限公司公司有限公司公司`,
-                `地址${~~(Math.random() * 80000)}`,
-                `${~~(Math.random() * 80000)}万元`,
-            ];
-        }),
-        rowNum: 12
+        columnWidth: [toAdaptedPx(240), toAdaptedPx(70), toAdaptedPx(70), toAdaptedPx(70)],
+        data: cityRank,
+        rowNum: 12,
     };
 
     return (
@@ -69,7 +66,7 @@ export default function Right() {
             <div>
                 <img src={DetailPng} alt="" />
                 <div className={styles.diseaseDetail}>
-                    <ScrollTable config={tableConfig} />;
+                    <ScrollTable config={tableConfig} />
                 </div>
             </div>
         </div>
