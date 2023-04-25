@@ -25,6 +25,7 @@ export default function Center(props) {
         rowNum: 8,
     };
 
+
     //地图数据处理
     const { mapData, visualMap } = useMemo(() => {
         if (!data) {

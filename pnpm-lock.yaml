@@ -23,6 +23,7 @@ specifiers:
   autoprefixer: ^10.4.2
   clsx: ^1.2.1
   cross-env: ^7.0.3
+  dayjs: ^1.11.7
   echarts: 5.2.0
   echarts-gl: 2.0.8
   echarts-wordcloud: ^2.1.0
@@ -66,6 +67,7 @@ dependencies:
   animejs: 3.2.1
   antd: 4.24.7_biqbaboplfbrettd7655fr4n2y
   clsx: 1.2.1
+  dayjs: 1.11.7
   echarts: 5.2.0
   echarts-gl: 2.0.8_echarts@5.2.0
   echarts-wordcloud: 2.1.0_echarts@5.2.0

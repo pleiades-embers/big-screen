@@ -1,9 +1,14 @@
+import { useRequest } from 'ahooks';
+import dayjs from "dayjs"
 import { registerMap } from 'echarts/core';
 import { useMemo } from 'react';
 
+import CenterPng from "@/assets/disease/center.png"
+import { AutoScrollView } from '@/components/AutoScrollView';
 import type { ECOption } from '@/components/SuperEChart';
 import { SuperEChart } from '@/components/SuperEChart';
 import WorldPalestine from '@/pages/Home/center/world.json';
+import { getVitalScreenInfectious } from '@/services/disease';
 import { toAdaptedPx } from '@/utils';
 
 import RichTooltipPng from './richTooltip.png'
@@ -12,6 +17,10 @@ import styles from './style.module.less';
 registerMap('Asia', WorldPalestine);
 export default function Center(props) {
     const { data = [] } = props;
+
+
+    const { data: infectious } = useRequest(getVitalScreenInfectious);
+
 
     //地图数据处理
     const { mapData } = useMemo(() => {
@@ -31,10 +40,26 @@ export default function Center(props) {
         };
     }, [data]);
 
+
     return (
         <div className={styles.center}>
             <SuperEChart options={getChart(mapData)} mergeOptions={false} />
-            <div></div>
+            <div className={styles.infectious}>
+                <img src={CenterPng} alt="" />
+                <div className={styles.content}>
+                    <AutoScrollView height={50 * 5} >
+                        <div className={styles.contentScrollBox}>
+                            {(infectious ?? []).map((el) => {
+                                return (
+                                    <div key={el?.sortNum}>
+                                        {dayjs(el?.publishTime).format("YYYY.MM")} <a href={el?.url} target="_blank" rel="noreferrer">{el?.titleCn}</a>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </AutoScrollView>
+                </div>
+            </div>
         </div>
     );
 }

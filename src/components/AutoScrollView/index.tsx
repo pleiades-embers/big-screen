@@ -40,7 +40,7 @@ export function AutoScrollView(props: AutoScrollViewProps) {
       const baseOptions = {
         targets: containerRef.current,
         loop: true,
-        duration: Math.round(30 * (containerHeight - viewHeight)),
+        duration: Math.round(60 * (containerHeight - viewHeight)),
         delay: 1000,
         endDelay: 1200,
       };

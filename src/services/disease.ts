@@ -13,5 +13,11 @@ export async function getCityRankByWord(query) {
 export async function getRiseRank(params) {
     return await request.get(`/vital/screen/riseRank?wordName=${params.wordName}&timeType=${params.timeType}`);
 }
+//传染病新闻列表
+export async function getVitalScreenInfectious() {
+    return await request.get(`/vital/screen/infectious`);
+}
+
+
 
 
