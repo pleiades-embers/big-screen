@@ -137,6 +137,7 @@ export type SuperEChartProps = {
   /** 更新图表配置信息时，是否要合并上次渲染时的配置信息。默认 false */
   mergeOptions?: boolean;
   setInstance?: (EChartInstance) => void;
+  onChartClick?: (params: any) => void;
   [key: string]: any;
 };
 
@@ -150,6 +151,7 @@ export function SuperEChart(props: SuperEChartProps) {
     autoAction,
     setInstance,
     mergeOptions: __mergeOptions = false,
+    onChartClick,
     ...restProps
   } = props;
 
@@ -158,7 +160,15 @@ export function SuperEChart(props: SuperEChartProps) {
 
   const [chartInstance, setChartInstance] = useState<EChartInstance | null>(null);
   const pageSize = useSize(document.body);
+  useEffect(() => {
+    if (chartInstance && onChartClick) {
+      chartInstance.on('click', onChartClick);
 
+      return () => {
+        chartInstance.off('click', onChartClick);
+      };
+    }
+  }, [chartInstance, onChartClick]);
   const chartOptions = useMemo(() => {
     let temp = options;
 

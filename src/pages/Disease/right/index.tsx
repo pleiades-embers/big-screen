@@ -12,13 +12,13 @@ import { getRiseRank } from '@/services/disease';
 import { toAdaptedPx } from '@/utils';
 
 import styles from './style.module.less';
-export default function Right() {
+export default function Right(props) {
     const [activeTab, setActiveTab] = useState(1)
     const { data } = useRequest(() => getRiseRank({
-        wordName: "influenza",
+        wordName: props?.activeWorld?.nameEn ?? "influenza",
         timeType: activeTab
     }), {
-        refreshDeps: [activeTab]
+        refreshDeps: [activeTab, props?.activeWorld?.nameEn]
     })
     const { trend, cityRank } = useMemo(() => {
 

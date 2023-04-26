@@ -1,4 +1,5 @@
 import { useRequest } from 'ahooks';
+import { useMemo } from 'react';
 
 import RankPng from '@/assets/disease/rank.png';
 import WorldCloudTitlePng from '@/assets/disease/world-cloud-title.png';
@@ -14,13 +15,23 @@ export default function Left(props) {
      * 词云
      */
     const { data } = useRequest(getWordsCloud);
-    const { dataRank } = props
+    const { dataRank, loading } = props
+    const chartOptions = useMemo(() => {
+        return getChart(data)
+    }, [data])
 
     return (
         <div className={styles.left}>
             <div>
                 <img src={WorldCloudTitlePng} alt="" />
-                <SuperEChart options={getChart(data)} mergeOptions={false} />
+                {
+                    !loading && (<SuperEChart options={chartOptions} mergeOptions={false}
+                        onChartClick={(params) => {
+                            props?.onChange?.(params.data)
+                        }}
+                    />)
+                }
+
             </div>
             <div>
                 <img src={RankPng} alt="" />
@@ -46,7 +57,7 @@ export default function Left(props) {
         </div>
     );
 }
-
+const colors = ["#46DADB", "#3254DD", "#BEE5FB", "#C6FFAA"];
 function getChart(data): ECOption {
     return {
         series: [
@@ -67,13 +78,14 @@ function getChart(data): ECOption {
                 textStyle: {
                     // fontFamily: 'PingFangSC',
                     fontFamily: 'AlibabaPuHuiTi-2-85-Bold',
-                    color: function () {
-                        let colors = ['#46DADB', '#3254DD', '#BEE5FB', '#C6FFAA'];
-                        //@ts-ignore
-                        return colors[parseInt(Math.random() * 4)];
+                    color: function (v) {
+                        return v.data.color; // 返回与数据项关联的颜色
                     },
                 },
-                data: data ?? [],
+                data: (data ?? []).map((item) => {
+                    //@ts-ignore
+                    return { ...item, color: colors[parseInt(Math.random() * 4)] };
+                }) ?? [],
             },
         ],
     };
