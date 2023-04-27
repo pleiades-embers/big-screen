@@ -1,4 +1,6 @@
 
+import "@arco-design/web-react/dist/css/arco.css";
+
 import { useRequest } from 'ahooks';
 import { useState } from 'react';
 

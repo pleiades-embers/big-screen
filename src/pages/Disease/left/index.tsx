@@ -1,3 +1,4 @@
+import { Spin } from "@arco-design/web-react"
 import { useRequest } from 'ahooks';
 import { useMemo } from 'react';
 
@@ -14,7 +15,7 @@ export default function Left(props) {
     /**
      * 词云
      */
-    const { data } = useRequest(getWordsCloud);
+    const { data, loading: worldLoading } = useRequest(getWordsCloud);
     const { dataRank, loading } = props
     const chartOptions = useMemo(() => {
         return getChart(data)
@@ -24,35 +25,37 @@ export default function Left(props) {
         <div className={styles.left}>
             <div>
                 <img src={WorldCloudTitlePng} alt="" />
-                {
-                    !loading && (<SuperEChart options={chartOptions} mergeOptions={false}
+                <Spin loading={worldLoading} block>
+                    <SuperEChart options={chartOptions} mergeOptions={false}
                         onChartClick={(params) => {
                             props?.onChange?.(params.data)
                         }}
-                    />)
-                }
+                    />
+                </Spin>
 
             </div>
             <div>
                 <img src={RankPng} alt="" />
-                <div className={styles.list} >
-                    <AutoScrollView height={52 * 10} mode="step" stepHeight={52}>
-                        {(dataRank ?? []).map((el) => {
-                            return (
-                                <div className={styles.listItem} key={el.countryName}>
-                                    <div>
-                                        <div className={styles.title}>{el.sortNum}.</div>
-                                        <div className={styles.title}>{el.countryName}</div>
-                                        <div className={styles.value}>{el.value ?? 0}</div>
+                <Spin block loading={loading}>
+                    <div className={styles.list} >
+                        <AutoScrollView height={52 * 10} mode="step" stepHeight={52}>
+                            {(dataRank ?? []).map((el) => {
+                                return (
+                                    <div className={styles.listItem} key={el.countryName}>
+                                        <div>
+                                            <div className={styles.title}>{el.sortNum}.</div>
+                                            <div className={styles.title}>{el.countryName}</div>
+                                            <div className={styles.value}>{el.value ?? 0}</div>
+                                        </div>
+                                        <div className={styles.progressBar}>
+                                            <div style={{ width: `${el.value}%` }}></div>
+                                        </div>
                                     </div>
-                                    <div className={styles.progressBar}>
-                                        <div style={{ width: `${el.value}%` }}></div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </AutoScrollView>
-                </div>
+                                );
+                            })}
+                        </AutoScrollView>
+                    </div>
+                </Spin>
             </div>
         </div>
     );
