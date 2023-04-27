@@ -27,7 +27,7 @@ export default function Disease() {
                 <img src={HeaderBG} />
             </div>
             <Left dataRank={data} onChange={setActiveWorld} loading={loading}></Left>
-            <Center data={data}></Center>
+            <Center data={data} loading={loading}></Center>
             <Right activeWorld={activeWorld}></Right>
         </div>
     );
