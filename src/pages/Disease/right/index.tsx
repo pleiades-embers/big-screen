@@ -101,7 +101,7 @@ function getChart(data): ECOption {
 
         },
         legend: {
-            data: ['传染病A'],
+            data: ['全部传染病'],
             right: "3%",
             top: "2%",
             textStyle: {
@@ -140,7 +140,7 @@ function getChart(data): ECOption {
         },
         series: [
             {
-                name: "传染病A",
+                name: "全部传染病",
                 data: (data ?? [])?.map(item => item.value),
                 type: 'line',
                 areaStyle: {

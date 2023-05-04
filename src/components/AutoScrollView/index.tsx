@@ -14,6 +14,7 @@ interface AutoScrollViewProps extends React.ComponentPropsWithRef<'div'> {
   /** mode 为 step 时，stepHeight为每次滚动的高度 */
   stepHeight?: number;
   children: React.ReactNode;
+  resetting?: boolean
 }
 
 export function AutoScrollView(props: AutoScrollViewProps) {
@@ -24,12 +25,23 @@ export function AutoScrollView(props: AutoScrollViewProps) {
     children,
     className,
     style,
+    resetting,
     ...restProps
   } = props;
 
   const viewHeight = toAdaptedPx(height);
   const _stepHeight = toAdaptedPx(stepHeight);
   const containerRef = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    if (!resetting && containerRef.current) {
+      containerRef.current.style.transform = "translateY(0)"
+      return () => {
+        // 执行清理处理，例如移除transforms
+      };
+    }
+  }, [resetting, containerRef])
 
   useEffect(() => {
     if (containerRef.current !== null) {

@@ -38,7 +38,8 @@ export default function Left(props) {
                 <img src={RankPng} alt="" />
                 <Spin block loading={loading}>
                     <div className={styles.list} >
-                        <AutoScrollView height={52 * 10} mode="step" stepHeight={52}>
+
+                        <AutoScrollView resetting={loading} height={52 * 10} mode="step" stepHeight={52}   >
                             {(dataRank ?? []).map((el) => {
                                 return (
                                     <div className={styles.listItem} key={el.countryName}>

@@ -11,7 +11,6 @@ import WorldPalestine from '@/pages/Home/center/world.json';
 import { getVitalScreenInfectious } from '@/services/disease';
 import { toAdaptedPx } from '@/utils';
 
-import RichTooltipPng from './richTooltip.png'
 import styles from './style.module.less';
 // @ts-ignore
 registerMap('Asia', WorldPalestine);
@@ -23,7 +22,7 @@ export default function Center(props) {
 
 
     //地图数据处理
-    const { mapData } = useMemo(() => {
+    const { mapData, visualMap } = useMemo(() => {
         if (!data) {
             return {
                 mapData: [],
@@ -37,13 +36,87 @@ export default function Center(props) {
                     value: item.value,
                 };
             }),
+            visualMap: {
+                min: 0,
+                inverse: true,
+                width: 200,
+                type: 'piecewise',
+                splitNumber: 3,
+                orient: 'horizontal',
+                left: 'center',
+                bottom: '2%',
+                piecewise: true,
+                pieces: [
+                    {
+                        lte: data?.[0]?.value,
+                        gte: data?.[9]?.value,
+                        label: 'Top1-Top10',
+                        color: '#d4efff',
+                    },
+                    {
+                        lte: data?.[10]?.value,
+                        gte: data?.[19]?.value,
+                        label: 'Top11-Top20',
+                        color: '#91d2f8',
+                    },
+                    {
+                        lte: data?.[20]?.value,
+                        gte: data?.[29]?.value,
+                        label: 'Top21-Top30',
+                        color: '#5192b7',
+                    },
+                    {
+                        lte: data?.[30]?.value,
+                        label: 'Top30以下',
+                        color: '#164c6a',
+                    },
+                    // {
+                    //     lte: data?.total?.[0]?.score,
+                    //     gte: data?.total?.[2]?.score,
+                    //     label: 'Top1-Top3',
+                    //     color: '#fcf5bf',
+                    // },
+                    // {
+                    //     lte: data?.total?.[3]?.score,
+                    //     gte: data?.total?.[9]?.score,
+                    //     label: 'Top4-Top10',
+                    //     color: '#fbdc8c',
+                    // },
+                    // {
+                    //     lte: data?.total?.[10]?.score,
+                    //     gte: data?.total?.[14]?.score,
+                    //     label: 'Top11-Top15',
+                    //     color: '#f5ae6e',
+                    // },
+                    // {
+                    //     lte: data?.total?.[10]?.score,
+                    //     gte: data?.total?.[14]?.score,
+                    //     label: 'Top11-Top15',
+                    //     color: '#fcd8a6',
+                    // },
+                    // {
+                    //     lte: data?.total?.[15]?.score,
+                    //     gte: data?.total?.[19]?.score,
+                    //     label: 'Top11-Top15',
+                    //     color: '#f5ae6e',
+                    // },
+                    // {
+                    //     lte: data?.total?.[20]?.score,
+                    //     label: 'Top20以下',
+                    //     color: '#faab40',
+                    // },
+                ],
+                textStyle: {
+                    color: 'white',
+                },
+            },
         };
     }, [data]);
 
 
     return (
         <div className={styles.center}>
-            <SuperEChart options={getChart(mapData)} mergeOptions={false} />
+            <SuperEChart options={getChart(mapData, visualMap)} mergeOptions={false} />
             <div className={styles.infectious}>
                 <img src={CenterPng} alt="" />
                 <div className={styles.content}>
@@ -122,7 +195,7 @@ export default function Center(props) {
 //         },
 //     },
 // };
-function getChart(data): ECOption {
+function getChart(data, visualMap): ECOption {
     return {
         tooltip: {
             show: true,
@@ -141,9 +214,14 @@ function getChart(data): ECOption {
             ${countryStr}
               </div>
               <div  >
-              <span >总排名</span>
+              <span >风险排名</span>
               <span class="num">${tooltipData?.sortNum ?? "-"}</span>
+   
             </div>
+            <div>
+                       
+            <span >发生次数</span>
+            <span class="num">${tooltipData?.value ?? "-"}</span></div>
             </div>`;
                 return res;
             },
@@ -175,7 +253,7 @@ function getChart(data): ECOption {
                 right: toAdaptedPx(30),
                 bottom: toAdaptedPx(0),
                 label: {
-                    show: true,
+                    show: false,
                     // @ts-ignore
                     textStyle: {
                         color: '#fff', //文字颜色
@@ -187,28 +265,28 @@ function getChart(data): ECOption {
                         zIndex: 10,
                     },
                     // @ts-ignore
-                    formatter: function (params: any) {
-                        // 设置文字标签的显示内容
-                        if (params?.value || params?.value === 0) {
-                            return `{tooltip|${params.value}}`;
+                    // formatter: function (params: any) {
+                    //     // 设置文字标签的显示内容
+                    //     if (params?.value || params?.value === 0) {
+                    //         return `{tooltip|${params.value}}`;
 
 
-                        } else {
-                            return '';
-                        }
-                    },
-                    rich: {
-                        tooltip: {
-                            width: 40,
-                            height: 29,
-                            fontFamily: 'PingFang SC',
-                            padding: [-6, -4, -0, -4],
-                            fontSize: toAdaptedPx(16),
-                            backgroundColor: {
-                                image: RichTooltipPng,
-                            },
-                        },
-                    },
+                    //     } else {
+                    //         return '';
+                    //     }
+                    // },
+                    // rich: {
+                    //     tooltip: {
+                    //         width: 40,
+                    //         height: 29,
+                    //         fontFamily: 'PingFang SC',
+                    //         padding: [-6, -4, -0, -4],
+                    //         fontSize: toAdaptedPx(16),
+                    //         backgroundColor: {
+                    //             image: RichTooltipPng,
+                    //         },
+                    //     },
+                    // },
                 },
                 itemStyle: {
                     opacity: 1, // 透明度
@@ -222,5 +300,6 @@ function getChart(data): ECOption {
                 // ...mapOption.series,
             },
         ],
+        visualMap
     };
 }
