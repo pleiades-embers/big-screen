@@ -1,6 +1,7 @@
 
 
 import { useRequest } from 'ahooks';
+import { groupBy } from 'lodash';
 import { useMemo, useState } from 'react';
 
 import DetailPng from '@/assets/disease/detail.png';
@@ -13,9 +14,11 @@ import { toAdaptedPx } from '@/utils';
 
 import styles from './style.module.less';
 export default function Right(props) {
+    const { worldData } = props
     const [activeTab, setActiveTab] = useState(1)
     const { data } = useRequest(() => getRiseRank({
-        wordName: props?.activeWorld?.nameEn ?? "influenza",
+
+        wordName: props?.activeWorld?.nameEn ?? "",
         timeType: activeTab
     }), {
         refreshDeps: [activeTab, props?.activeWorld?.nameEn]
@@ -48,12 +51,11 @@ export default function Right(props) {
         data: cityRank,
         rowNum: 12,
     };
-
     return (
         <div className={styles.right}>
             <div>
                 <img src={TrendPng} alt="" />
-                <SuperEChart options={getChart(trend)} mergeOptions={false} />
+                <SuperEChart options={getChart(trend, props?.activeWorld?.nameEn, worldData)} mergeOptions={false} />
                 <div className={styles.tabs}>
                     {
                         ["周", "月", "年"].map((item, index) => {
@@ -73,8 +75,16 @@ export default function Right(props) {
     );
 }
 
+function uniqueFunc(arr, uniId) {
+    if (!arr) {
+        return []
+    }
+    const res = new Map();
+    return arr.filter((item) => !res.has(item[uniId]) && res.set(item[uniId], 1));
+}
 
-function getChart(data): ECOption {
+
+function getChart(data, activeWorld, worldData): ECOption {
     return {
         title: {
             text: '单位：例',
@@ -91,7 +101,7 @@ function getChart(data): ECOption {
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: (data ?? []).map(item => item.dateTime),
+            data: (uniqueFunc(data, "dateTime") ?? []).map(item => item.dateTime),
             axisLine: {
                 lineStyle: {
                     color: "#bae7ff",
@@ -101,7 +111,6 @@ function getChart(data): ECOption {
 
         },
         legend: {
-            data: ['全部传染病'],
             right: "3%",
             top: "2%",
             textStyle: {
@@ -138,32 +147,43 @@ function getChart(data): ECOption {
             },
 
         },
-        series: [
-            {
-                name: "全部传染病",
-                data: (data ?? [])?.map(item => item.value),
+        series: activeWorld === undefined && data?.length > 0 ? Object.keys(groupBy(data, "keywords")).map(item => {
+
+            return {
+                name: (worldData ?? []).find(item3 => item3?.nameEn === item)?.name,
                 type: 'line',
-                areaStyle: {
-                    color: {
-                        type: 'linear',
-                        x: 0,
-                        y: 0,
-                        x2: 0,
-                        y2: 1,
-                        colorStops: [
-                            {
-                                offset: 0,
-                                color: "#4E8BFF", // 0% 处的颜色
-                            },
-                            {
-                                offset: 1,
-                                color: 'rgba(0, 0, 0, 0)', // 0% 处的颜色
-                            },
-                        ],
-                        global: false,
-                    },
-                }
+                stack: 'value',
+                data: groupBy(data, "keywords")?.[item]?.map(item2 => item2.value),
+                areaStyle: {},
+
             }
-        ]
+        }) : [{
+            name: (worldData ?? []).find(item3 => item3?.nameEn === activeWorld)?.name ?? "全部传染病",
+            type: 'line',
+            data: (data ?? [])?.map(item => item?.value),
+            areaStyle: {},
+        }]
+
     };
 }
+
+// areaStyle: {
+//     color: {
+//         type: 'linear',
+//         x: 0,
+//         y: 0,
+//         x2: 0,
+//         y2: 1,
+//         colorStops: [
+//             {
+//                 offset: 0,
+//                 color: "#4E8BFF", // 0% 处的颜色
+//             },
+//             {
+//                 offset: 1,
+//                 color: 'rgba(0, 0, 0, 0)', // 0% 处的颜色
+//             },
+//         ],
+//         global: false,
+//     },
+// }

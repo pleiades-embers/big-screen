@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import HeaderBG from '@/assets/disease/headerBG.png';
 import { CanvasBg } from '@/components/CanvasBg';
-import { getCityRankByWord } from '@/services/disease';
+import { getCityRankByWord, getWordsCloud } from '@/services/disease';
 
 import Center from './center';
 import Left from './left';
@@ -14,6 +14,7 @@ import Right from './right';
 import styles from './style.module.less';
 export default function Disease() {
     const [activeWorld, setActiveWorld] = useState<any>()
+    const { data: worldData, loading: worldLoading } = useRequest(getWordsCloud);
     const { data, loading } = useRequest(() => getCityRankByWord(activeWorld?.nameEn ?? 'influenza'), {
         refreshDeps: [activeWorld],
         debounceInterval: 1000
@@ -41,9 +42,9 @@ export default function Disease() {
             <div className={styles.header}>
                 <img src={HeaderBG} />
             </div>
-            <Left dataRank={data} onChange={setActiveWorld} loading={loading}></Left>
+            <Left dataRank={data} data={worldData} worldLoading={worldLoading} onChange={setActiveWorld} loading={loading}></Left>
             <Center data={data} loading={loading}></Center>
-            <Right activeWorld={activeWorld}></Right>
+            <Right activeWorld={activeWorld} worldData={worldData}></Right>
         </div>
     );
 }
