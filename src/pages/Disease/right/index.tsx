@@ -128,7 +128,6 @@ function getChart(data, activeWorld, worldData): ECOption {
             },
         ],
         yAxis: {
-            type: 'value',
             splitLine: {
                 show: true,
                 lineStyle: {
@@ -152,16 +151,16 @@ function getChart(data, activeWorld, worldData): ECOption {
             return {
                 name: (worldData ?? []).find(item3 => item3?.nameEn === item)?.name,
                 type: 'line',
-                stack: 'value',
+                // stack: 'value',
                 data: groupBy(data, "keywords")?.[item]?.map(item2 => item2.value),
-                areaStyle: {},
+                // areaStyle: {},
 
             }
         }) : [{
             name: (worldData ?? []).find(item3 => item3?.nameEn === activeWorld)?.name ?? "全部传染病",
             type: 'line',
             data: (data ?? [])?.map(item => item?.value),
-            areaStyle: {},
+            // areaStyle: {},
         }]
 
     };
