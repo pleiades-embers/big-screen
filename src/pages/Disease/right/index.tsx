@@ -30,7 +30,7 @@ export default function Right(props) {
         }
         return {
             trend: data.trend, cityRank: data.cityRank.map(item => {
-                return [`${item.countryName}`, item.addedNum ?? "-", item.total, "-"]
+                return [`${item.countryName}`, item.addedNum ?? "-", item.total]
             })
         }
 
@@ -43,8 +43,8 @@ export default function Right(props) {
         headerBGC: 'linear-gradient(0deg, #1C3B68 -24.83%, rgba(47, 61, 82, 0.0884779) 140%)',
         oddRowBGC: 'rgba(255, 255, 255, 0.17)',
         evenRowBGC: 'transparent',
-        header: ['国家(Country)', '新增', '累计', "治愈"],
-        columnWidth: [toAdaptedPx(240), toAdaptedPx(70), toAdaptedPx(70), toAdaptedPx(70)],
+        header: ['国家(Country)', '新增', '累计'],
+        columnWidth: [toAdaptedPx(240), toAdaptedPx(70), toAdaptedPx(70)],
         data: cityRank,
         rowNum: 12,
     };
