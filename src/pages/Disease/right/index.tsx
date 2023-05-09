@@ -33,7 +33,7 @@ export default function Right(props) {
         }
         return {
             trend: data.trend, cityRank: data.cityRank.map(item => {
-                return [`${item.countryName}`, item.addedNum ?? "-", item.total]
+                return [`${item.countryName} (${item.countryNameEn})`, item.addedNum ?? "-", item.total]
             })
         }
 
