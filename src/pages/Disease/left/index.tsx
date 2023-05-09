@@ -1,5 +1,4 @@
 import { Spin } from "@arco-design/web-react"
-import { useRequest } from 'ahooks';
 import { useMemo } from 'react';
 
 import RankPng from '@/assets/disease/rank.png';
@@ -7,7 +6,6 @@ import WorldCloudTitlePng from '@/assets/disease/world-cloud-title.png';
 import { AutoScrollView } from '@/components/AutoScrollView';
 import type { ECOption } from '@/components/SuperEChart';
 import { SuperEChart } from '@/components/SuperEChart';
-import { getWordsCloud } from '@/services/disease';
 
 import styles from './style.module.less';
 
@@ -15,8 +13,8 @@ export default function Left(props) {
     /**
      * 词云
      */
-    const { data, loading: worldLoading } = useRequest(getWordsCloud);
-    const { dataRank, loading } = props
+
+    const { dataRank, loading, data, worldLoading } = props
     const chartOptions = useMemo(() => {
         return getChart(data)
     }, [data])
@@ -38,7 +36,8 @@ export default function Left(props) {
                 <img src={RankPng} alt="" />
                 <Spin block loading={loading}>
                     <div className={styles.list} >
-                        <AutoScrollView height={52 * 10} mode="step" stepHeight={52}>
+
+                        <AutoScrollView resetting={loading} height={52 * 10} mode="step" stepHeight={52}   >
                             {(dataRank ?? []).map((el) => {
                                 return (
                                     <div className={styles.listItem} key={el.countryName}>
