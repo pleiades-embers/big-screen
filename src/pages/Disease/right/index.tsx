@@ -47,7 +47,7 @@ export default function Right(props) {
         oddRowBGC: 'rgba(255, 255, 255, 0.17)',
         evenRowBGC: 'transparent',
         header: ['国家(Country)', '新增', '累计'],
-        columnWidth: [toAdaptedPx(240), toAdaptedPx(70), toAdaptedPx(70)],
+        columnWidth: [toAdaptedPx(300), toAdaptedPx(70), toAdaptedPx(70)],
         data: cityRank,
         rowNum: 12,
     };
