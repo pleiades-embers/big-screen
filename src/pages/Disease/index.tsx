@@ -15,12 +15,12 @@ import styles from './style.module.less';
 export default function Disease() {
     const [activeWorld, setActiveWorld] = useState<any>()
     const { data: worldData, loading: worldLoading } = useRequest(getWordsCloud);
-    const { data, loading } = useRequest(() => getCityRankByWord(activeWorld?.nameEn ?? 'influenza'), {
+    const { data, loading } = useRequest(() => getCityRankByWord(activeWorld?.nameEn ?? ""), {
         refreshDeps: [activeWorld],
         debounceInterval: 1000
     });
     // 当你需要改变页面标题的动态值
-    const dynamicTitle = "传染病监测系统";
+    const dynamicTitle = "传染病监测动态";
 
     useEffect(() => {
         // 将原始标题存储在一个变量中
