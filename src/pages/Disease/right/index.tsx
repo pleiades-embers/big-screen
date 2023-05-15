@@ -33,7 +33,7 @@ export default function Right(props) {
         }
         return {
             trend: data.trend, cityRank: data.cityRank.map(item => {
-                return [item.sortNum, `${item.countryName} (${item.countryNameEn})`, item.addedNum ?? "-", item.total]
+                return [item.sortNum, `${item.countryName}`, `<div style="width:50px;">${item.addedNum}</div>` ?? "-", `<div style="width:60px;">${item.total}</div>`]
             })
         }
 
@@ -48,7 +48,7 @@ export default function Right(props) {
         evenRowBGC: 'transparent',
         header: ["排名", '国家(Country)', '新增', '累计'],
         // eslint-disable-next-line no-sparse-arrays
-        columnWidth: [toAdaptedPx(50), toAdaptedPx(250), , toAdaptedPx(80), toAdaptedPx(100)],
+        columnWidth: [toAdaptedPx(50), toAdaptedPx(175)],
         data: cityRank,
         rowNum: 12,
     };
