@@ -33,7 +33,7 @@ export default function Right(props) {
         }
         return {
             trend: data.trend, cityRank: data.cityRank.map(item => {
-                return [`${item.countryName} (${item.countryNameEn})`, item.addedNum ?? "-", item.total]
+                return [item.sortNum, `${item.countryName} (${item.countryNameEn})`, item.addedNum ?? "-", item.total]
             })
         }
 
@@ -46,8 +46,9 @@ export default function Right(props) {
         headerBGC: 'linear-gradient(0deg, #1C3B68 -24.83%, rgba(47, 61, 82, 0.0884779) 140%)',
         oddRowBGC: 'rgba(255, 255, 255, 0.17)',
         evenRowBGC: 'transparent',
-        header: ['国家(Country)', '新增', '累计'],
-        columnWidth: [toAdaptedPx(300), toAdaptedPx(70), toAdaptedPx(70)],
+        header: ["排名", '国家(Country)', '新增', '累计'],
+        // eslint-disable-next-line no-sparse-arrays
+        columnWidth: [toAdaptedPx(50), toAdaptedPx(250), , toAdaptedPx(80), toAdaptedPx(100)],
         data: cityRank,
         rowNum: 12,
     };
@@ -68,7 +69,7 @@ export default function Right(props) {
             <div>
                 <img src={DetailPng} alt="" />
                 <div className={styles.diseaseDetail}>
-                    <ScrollTable config={tableConfig} />
+                    <ScrollTable config={tableConfig as any} />
                 </div>
             </div>
         </div>
@@ -82,7 +83,23 @@ function uniqueFunc(arr, uniId) {
     const res = new Map();
     return arr.filter((item) => !res.has(item[uniId]) && res.set(item[uniId], 1));
 }
-
+export const axisLabelHelper = (val, percentFormat) => {
+    if (Math.abs(val) <= 1 && Math.abs(val) > 0) {
+        if (!percentFormat) {
+            return val;
+        }
+        if ((val * 100).toString().length > 5) {
+            return `${(val * 100).toString().slice(0, 5)} %`;
+        }
+        return `${val * 100}%`;
+    }
+    if (Math.abs(val) >= 1000000) {
+        return `${val / 1000000}M`; // 解决在数字较大的时候不易读的问题 - 百万
+    } else if (Math.abs(val) >= 1000) {
+        return `${val / 1000}k`; // 解决在数字较大的时候不易读的问题 - 千
+    }
+    return val.toLocaleString();
+};
 
 function getChart(data, activeWorld, worldData): ECOption {
     return {
@@ -128,6 +145,7 @@ function getChart(data, activeWorld, worldData): ECOption {
             },
         ],
         yAxis: {
+
             splitLine: {
                 show: true,
                 lineStyle: {
@@ -142,7 +160,8 @@ function getChart(data, activeWorld, worldData): ECOption {
                     fontSize: toAdaptedPx(12),
                     color: "#fff",
                     fontFamily: 'AlibabaPuHuiTi-2-45-Light'
-                }
+                },
+                formatter: (value) => axisLabelHelper(value, false)
             },
 
         },
