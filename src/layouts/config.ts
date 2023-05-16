@@ -13,6 +13,10 @@ export const routeList: RouteObject[] = [
     path: 'd1',
     element: lr(lazy(() => import('@/pages/Disease'))),
   },
+  // {
+  //   path: 'download',
+  //   element: lr(lazy(() => import('@/pages/Download'))),
+  // },
   {
     path: 'p1',
     element: lr(lazy(() => import('@/pages/Page1'))),

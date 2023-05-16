@@ -43,6 +43,7 @@
     "echarts": "5.2.0",
     "echarts-gl": "2.0.8",
     "echarts-wordcloud": "^2.1.0",
+    "html2canvas": "^1.4.1",
     "jotai": "^1.6.4",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

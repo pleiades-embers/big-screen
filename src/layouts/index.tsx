@@ -1,4 +1,3 @@
-
 import { lazy } from 'react';
 import { Route, Routes, useSearchParams } from 'react-router-dom';
 
@@ -20,22 +19,38 @@ export function AppLayout() {
     isLogin = true;
   }
 
+  console.log();
   return (
-    <ScreenAdaptor uiConfig={uiConfig}>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isLogin
-              ? lr(lazy(() => import('./MainLayout')))
-              : navigateTo('/access_denied')
-          }>
-          {routeList.map((el, index) => {
-            // @ts-ignore
-            return <Route key={index} {...el} />;
-          })}
-        </Route>
-      </Routes>
-    </ScreenAdaptor>
+    <>
+      {window.location.pathname === '/download' ? (
+        <Routes>
+          <Route path="/">
+            <Route
+              key={'download'}
+              path={'download'}
+              element={lr(lazy(() => import('@/pages/Download')))}
+            />
+            ;
+          </Route>
+        </Routes>
+      ) : (
+        <ScreenAdaptor uiConfig={uiConfig}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                isLogin
+                  ? lr(lazy(() => import('./MainLayout')))
+                  : navigateTo('/access_denied')
+              }>
+              {routeList.map((el, index) => {
+                // @ts-ignore
+                return <Route key={index} {...el} />;
+              })}
+            </Route>
+          </Routes>
+        </ScreenAdaptor>
+      )}
+    </>
   );
 }
