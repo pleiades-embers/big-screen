@@ -5,7 +5,7 @@ import { Table } from '@arco-design/web-react';
 import { useRequest } from 'ahooks';
 import { Button } from "antd";
 import html2canvas from 'html2canvas';
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 import { postDetailRank } from '@/services/page';
 
