@@ -1,9 +1,8 @@
 import "@arco-design/web-react/dist/css/arco.css";
 
 import type { TableColumnProps } from '@arco-design/web-react';
-import { Table } from '@arco-design/web-react';
+import { Button, Table } from '@arco-design/web-react';
 import { useRequest } from 'ahooks';
-import { Button } from "antd";
 import html2canvas from 'html2canvas';
 import { useMemo, useRef } from 'react';
 

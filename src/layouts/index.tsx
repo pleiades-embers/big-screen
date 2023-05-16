@@ -12,14 +12,12 @@ export function AppLayout() {
   const token = params.get('token');
   let isLogin = !!getAuthToken() || true;
 
-  // console.log('token', token);
 
   if (!isLogin && token) {
     setAuthToken(token);
     isLogin = true;
   }
 
-  console.log();
   return (
     <>
       {window.location.pathname === '/download' ? (
