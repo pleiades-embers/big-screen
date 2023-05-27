@@ -31,24 +31,37 @@ export function AppLayout() {
             ;
           </Route>
         </Routes>
-      ) : (
-        <ScreenAdaptor uiConfig={uiConfig}>
+      ) :
+        window.location.pathname === '/grid' ? (
           <Routes>
-            <Route
-              path="/"
-              element={
-                isLogin
-                  ? lr(lazy(() => import('./MainLayout')))
-                  : navigateTo('/access_denied')
-              }>
-              {routeList.map((el, index) => {
-                // @ts-ignore
-                return <Route key={index} {...el} />;
-              })}
+            <Route path="/">
+              <Route
+                key={'grid'}
+                path={'grid'}
+                element={lr(lazy(() => import('@/pages/Grid')))}
+              />
+              ;
             </Route>
           </Routes>
-        </ScreenAdaptor>
-      )}
+        )
+          : (
+            <ScreenAdaptor uiConfig={uiConfig}>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    isLogin
+                      ? lr(lazy(() => import('./MainLayout')))
+                      : navigateTo('/access_denied')
+                  }>
+                  {routeList.map((el, index) => {
+                    // @ts-ignore
+                    return <Route key={index} {...el} />;
+                  })}
+                </Route>
+              </Routes>
+            </ScreenAdaptor>
+          )}
     </>
   );
 }
