@@ -4075,6 +4075,7 @@
       },
       "properties": {
         "name": "Brunei",
+        "cn": "文莱",
         "childNum": 2
       }
     },
@@ -7112,6 +7113,7 @@
       },
       "properties": {
         "name": "Canada",
+        "cn": "加拿大",
         "childNum": 110
       }
     },
@@ -7534,6 +7536,7 @@
       },
       "properties": {
         "name": "Chile",
+        "cn": "智利",
         "childNum": 26
       }
     },
@@ -8467,6 +8470,7 @@
       },
       "properties": {
         "name": "China",
+        "cn": "中国",
         "childNum": 15
       }
     },
@@ -9170,6 +9174,7 @@
       },
       "properties": {
         "name": "Colombia",
+        "cn": "哥伦比亚",
         "childNum": 1
       }
     },
@@ -10382,6 +10387,7 @@
       },
       "properties": {
         "name": "Ecuador",
+        "cn": "厄瓜多尔",
         "childNum": 9
       }
     },
@@ -11185,6 +11191,7 @@
       },
       "properties": {
         "name": "Fiji",
+        "cn": "斐济",
         "childNum": 7
       }
     },
@@ -11594,7 +11601,8 @@
         ]
       },
       "properties": {
-        "name": "Micronesia",
+        "name": "Federated States of Micronesia",
+        "cn": "密克罗尼西亚联邦",
         "childNum": 2
       }
     },
@@ -13468,6 +13476,7 @@
       },
       "properties": {
         "name": "Guatemala",
+        "cn": "危地马拉",
         "childNum": 1
       }
     },
@@ -13702,6 +13711,7 @@
       },
       "properties": {
         "name": "Honduras",
+        "cn": "洪都拉斯",
         "childNum": 1
       }
     },
@@ -15445,6 +15455,7 @@
       },
       "properties": {
         "name": "Indonesia",
+        "cn": "印度尼西亚",
         "childNum": 107
       }
     },
@@ -17995,6 +18006,7 @@
       },
       "properties": {
         "name": "Kiribati",
+        "cn": "基里巴斯",
         "childNum": 2
       }
     },
@@ -19359,6 +19371,7 @@
       },
       "properties": {
         "name": "Mexico",
+        "cn": "墨西哥",
         "childNum": 10
       }
     },
@@ -20847,6 +20860,7 @@
       },
       "properties": {
         "name": "Malaysia",
+        "cn": "马来西亚",
         "childNum": 8
       }
     },
@@ -21311,6 +21325,7 @@
       },
       "properties": {
         "name": "Nicaragua",
+        "cn": "尼加拉瓜",
         "childNum": 1
       }
     },
@@ -21328,6 +21343,7 @@
       },
       "properties": {
         "name": "Niue",
+        "cn": "纽埃",
         "childNum": 1
       }
     },
@@ -22725,6 +22741,7 @@
       },
       "properties": {
         "name": "Panama",
+        "cn": "巴拿马",
         "childNum": 3
       }
     },
@@ -22979,6 +22996,7 @@
       },
       "properties": {
         "name": "Peru",
+        "cn": "秘鲁",
         "childNum": 1
       }
     },
@@ -23471,6 +23489,23 @@
       }
     },
     {
+      "type": "Feature",
+      "properties": {
+        "name": "Cook Islands",
+        "cn": "库克群岛",
+        "childNum": 38
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [200.7090835571289, -20.834861650361358],
+            [200.71835327148438, -20.837122318967378]
+          ]
+        ]
+      }
+    },
+    {
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -23484,6 +23519,7 @@
       },
       "properties": {
         "name": "Palau",
+        "cn": "帕劳",
         "childNum": 1
       }
     },
@@ -26541,6 +26577,7 @@
       },
       "properties": {
         "name": "Russia",
+        "cn": "俄罗斯",
         "childNum": 73
       }
     },
@@ -27238,7 +27275,8 @@
         ]
       },
       "properties": {
-        "name": "Solomon Is.",
+        "name": "Solomon Islands",
+        "cn": "所罗门群岛",
         "childNum": 16
       }
     },
@@ -27352,6 +27390,7 @@
       },
       "properties": {
         "name": "El Salvador",
+        "cn": "萨尔瓦多",
         "childNum": 1
       }
     },
@@ -28222,6 +28261,7 @@
       },
       "properties": {
         "name": "Thailand",
+        "cn": "泰国",
         "childNum": 4
       }
     },
@@ -28577,6 +28617,7 @@
       },
       "properties": {
         "name": "Tonga",
+        "cn": "汤加",
         "childNum": 2
       }
     },
@@ -30580,6 +30621,7 @@
       },
       "properties": {
         "name": "United States of America",
+        "cn": "美国",
         "childNum": 76
       }
     },
@@ -31191,6 +31233,7 @@
       },
       "properties": {
         "name": "Vietnam",
+        "cn": "越南",
         "childNum": 4
       }
     },
@@ -31296,6 +31339,7 @@
       },
       "properties": {
         "name": "Vanuatu",
+        "cn": "瓦努阿图",
         "childNum": 10
       }
     },
@@ -31326,6 +31370,7 @@
       },
       "properties": {
         "name": "Samoa",
+        "cn": "萨摩亚",
         "childNum": 2
       }
     },

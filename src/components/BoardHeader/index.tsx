@@ -1,3 +1,4 @@
+
 import styles from "./style.module.less"
 
 export default function BoardHeader(props) {

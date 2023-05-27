@@ -5,15 +5,21 @@
   white-space: nowrap;
   margin-bottom: 5px;
   width: 100%;
+
   > div {
     display: grid;
     place-content: center;
     place-items: center;
-    grid-template-columns: 1fr 6fr 2fr;
+    grid-template-columns: 1fr 5fr 2fr;
     grid-template-rows: 57px;
     font-family: 'PingFang SC';
     font-style: normal;
     font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 12px;
     > div:nth-child(2) {
       place-self: center start;
       margin-left: 40px;
