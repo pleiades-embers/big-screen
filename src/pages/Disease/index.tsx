@@ -20,7 +20,7 @@ export default function Disease() {
         debounceInterval: 1000
     });
     // 当你需要改变页面标题的动态值
-    const dynamicTitle = "传染病监测动态";
+    const dynamicTitle = "全球卫生安全监测系统";
 
     useEffect(() => {
         // 将原始标题存储在一个变量中

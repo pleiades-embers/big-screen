@@ -49,33 +49,34 @@ export default function Center(props) {
                 pieces: [
                     {
                         lte: data?.[0]?.value,
-                        gte: data?.[9]?.value,
-                        label: 'Top1-Top10',
+                        gte: data?.[19]?.value,
+                        label: 'Top1-Top20',
                         color: '#d4efff',
                     },
                     {
-                        lte: data?.[10]?.value,
-                        gte: data?.[19]?.value,
-                        label: 'Top11-Top20',
+                        lte: data?.[20]?.value,
+                        gte: data?.[49]?.value,
+                        label: 'Top20-Top50',
                         color: '#91d2f8',
                     },
                     {
-                        lte: data?.[20]?.value,
-                        gte: data?.[29]?.value,
-                        label: 'Top21-Top30',
+
+                        lte: data?.[59]?.value,
+                        gte: data?.[99]?.value,
+                        label: 'Top50-Top100',
                         color: '#5192b7',
                     },
                     {
-                        lte: data?.[30]?.value,
-                        label: 'Top30以下',
+                        lte: data?.[100]?.value,
+                        gte: data?.[149]?.value,
+                        label: 'Top100-Top150',
                         color: '#164c6a',
                     },
-                    // {
-                    //     lte: data?.total?.[0]?.score,
-                    //     gte: data?.total?.[2]?.score,
-                    //     label: 'Top1-Top3',
-                    //     color: '#fcf5bf',
-                    // },
+                    {
+                        lte: data?.[150]?.value,
+                        label: 'Top150以下',
+                        color: "#0e3c53"
+                    },
                     // {
                     //     lte: data?.total?.[3]?.score,
                     //     gte: data?.total?.[9]?.score,
@@ -125,7 +126,7 @@ export default function Center(props) {
                             {(infectious ?? []).map((el) => {
                                 return (
                                     <div key={el?.sortNum}>
-                                        {dayjs(el?.publishTime).format("YYYY.MM")} <a href={el?.url} target="_blank" rel="noreferrer">{el?.titleCn}</a>
+                                        {dayjs(el?.publishTime).format("YYYY/MM/DD")} <a href={el?.url} target="_blank" rel="noreferrer">{el?.titleCn}</a>
                                     </div>
                                 );
                             })}
