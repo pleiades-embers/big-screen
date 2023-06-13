@@ -126,7 +126,7 @@ export default function Center(props) {
                             {(infectious ?? []).map((el) => {
                                 return (
                                     <div key={el?.sortNum}>
-                                        {dayjs(el?.publishTime).format("YYYY/MM/DD")} <a href={el?.url} target="_blank" rel="noreferrer">{el?.titleCn}</a>
+                                        {dayjs(el?.publishTime).format("YYYY/MM/DD")} <a href={el?.url} className={styles.noStyle} target="_blank" rel="noreferrer">{el?.titleCn}</a>
                                     </div>
                                 );
                             })}
@@ -256,6 +256,12 @@ function getChart(data, visualMap): ECOption {
                 label: {
                     show: false,
                     // @ts-ignore
+                    emphasis: {
+                        textStyle: {
+                            color: '#a265ca',
+                            fontWeight: 'bold',
+                        }
+                    },
                     textStyle: {
                         color: '#fff', //文字颜色
                         alignText: 'center',
