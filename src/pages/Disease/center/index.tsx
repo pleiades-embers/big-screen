@@ -258,8 +258,10 @@ function getChart(data, visualMap): ECOption {
                     // @ts-ignore
                     emphasis: {
                         textStyle: {
-                            color: '#a265ca',
+                            color: '#fff',
                             fontWeight: 'bold',
+                            textBorderColor: '#000', // 描边文字颜色
+                            textBorderWidth: 2 // 描边文字宽度
                         }
                     },
                     textStyle: {
