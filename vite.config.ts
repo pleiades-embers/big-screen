@@ -45,7 +45,7 @@ export default defineConfig({
     port: 3033,
     proxy: {
       '/vital': {
-        target: 'http://47.100.208.92:81',
+        target: 'http://47.243.53.100:81',
       },
     },
   },

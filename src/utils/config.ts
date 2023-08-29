@@ -1,14 +1,14 @@
 export default {
   local: {
-    BASE_API: 'http://47.100.208.92:81',
+    BASE_API: 'http://47.243.53.100:81',
   },
   dev: {
-    BASE_API: 'http://47.100.208.92:81',
+    BASE_API: 'http://47.243.53.100:81',
   },
   test: {
-    BASE_API: 'http://47.100.208.92:81',
+    BASE_API: 'http://47.243.53.100:81',
   },
   prod: {
-    BASE_API: 'http://47.100.208.92:81',
+    BASE_API: 'http://47.243.53.100:81',
   },
 }[VITE_MODE];

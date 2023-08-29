@@ -1,6 +1,6 @@
 import anime from 'animejs';
 import clsx from 'clsx';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { toAdaptedPx } from '@/utils';
 
@@ -14,7 +14,8 @@ interface AutoScrollViewProps extends React.ComponentPropsWithRef<'div'> {
   /** mode 为 step 时，stepHeight为每次滚动的高度 */
   stepHeight?: number;
   children: React.ReactNode;
-  resetting?: boolean
+  resetting?: boolean;
+  isTimerEnabled?: boolean;
 }
 
 export function AutoScrollView(props: AutoScrollViewProps) {
@@ -26,27 +27,54 @@ export function AutoScrollView(props: AutoScrollViewProps) {
     className,
     style,
     resetting,
+    isTimerEnabled,
     ...restProps
   } = props;
 
   const viewHeight = toAdaptedPx(height);
   const _stepHeight = toAdaptedPx(stepHeight);
   const containerRef = useRef<HTMLDivElement>(null);
-
+  const [maxTranslateY, setMaxTranslateY] = useState(0);
 
   useEffect(() => {
     if (!resetting && containerRef.current) {
-      containerRef.current.style.transform = "translateY(0)"
+      containerRef.current.style.transform = 'translateY(0)';
       return () => {
         // 执行清理处理，例如移除transforms
       };
     }
-  }, [resetting, containerRef])
+  }, [resetting, containerRef]);
+  useEffect(() => {
+    let intervalId;
+    if (isTimerEnabled) {
+      intervalId = setInterval(() => {
+        const element = containerRef.current;
+        if (element) {
+          const computedStyle = getComputedStyle(element);
+          const transform = computedStyle.transform || computedStyle.webkitTransform;
+          if (transform && transform !== 'none') {
+            const matrix = transform.match(/matrix.*\((.+)\)/);
+            if (matrix && matrix[1]) {
+              const matrixValues = matrix[1].split(', ');
+              const translateYValue = parseFloat(matrixValues[5]);
+              if (translateYValue >= maxTranslateY) {
+                containerRef.current.style.transform = 'translateY(0)';
+              }
+            }
+          }
+        }
+      }, 1000); // 每秒钟执行一次
+    }
 
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [containerRef, isTimerEnabled, maxTranslateY]);
+
+  console.log(maxTranslateY, '111');
   useEffect(() => {
     if (containerRef.current !== null) {
       const { height: containerHeight } = containerRef.current.getBoundingClientRect();
-
       if (containerHeight <= viewHeight) return;
 
       const baseOptions = {
@@ -68,7 +96,7 @@ export function AutoScrollView(props: AutoScrollViewProps) {
         const keyframes = new Array(steps).fill(0).map((_, index) => {
           return { translateY: -_stepHeight * (index + 1), delay: 1000 };
         });
-
+        setMaxTranslateY(keyframes[keyframes.length - 1]?.translateY);
         anime({
           ...baseOptions,
           easing: 'easeOutCirc',
