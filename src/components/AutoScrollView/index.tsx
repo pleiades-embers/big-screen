@@ -71,7 +71,6 @@ export function AutoScrollView(props: AutoScrollViewProps) {
     };
   }, [containerRef, isTimerEnabled, maxTranslateY]);
 
-  console.log(maxTranslateY, '111');
   useEffect(() => {
     if (containerRef.current !== null) {
       const { height: containerHeight } = containerRef.current.getBoundingClientRect();
